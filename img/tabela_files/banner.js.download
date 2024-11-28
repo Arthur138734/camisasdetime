@@ -1,0 +1,4822 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/@linx-impulse/banner-client-js/node_modules/@linx-impulse/commons-js/src/browser/getCookie.js":
+/*!********************************************************************************************************************!*\
+  !*** ./node_modules/@linx-impulse/banner-client-js/node_modules/@linx-impulse/commons-js/src/browser/getCookie.js ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getCookie = getCookie;
+/* eslint-disable no-useless-escape */
+
+/**
+ * Returns a cookie value by its name
+ *
+ * @memberof module:@linx-impulse/commons-js/browser
+ * @method getCookie
+ * @param {string} name The name of cookie to get
+ * @param {object} options A list of key-value pair options.
+ * @param {HTMLDocument} [options.document] The document object to use. If not
+ *  provided, uses the global `window.top.document`.
+ */
+function getCookie(name, options) {
+  var opt = options || {};
+  var doc = opt.document || window.top.document;
+
+  var regex = '(?:(?:^|.*;)\\s*';
+  regex += encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&');
+  regex += '\\s*\\=\\s*([^;]*).*$)|^.*$';
+
+  var value = doc.cookie.replace(new RegExp(regex), '$1');
+  value = decodeURIComponent(value);
+
+  return value || undefined;
+}
+
+/* eslint-enable no-useless-escape */
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/banner-client-js/node_modules/@linx-impulse/commons-js/src/http/ajax.js":
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/@linx-impulse/banner-client-js/node_modules/@linx-impulse/commons-js/src/http/ajax.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.ajax = ajax;
+/*
+ * Linx commons-js.
+ *
+ * A library with common functions implementations for javascript applications.
+ *
+ * Copyright (c) 2018 - Linx S.A
+ *
+ * LICENSE: This software is the confidential and proprietary information of
+ * Linx S.A ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the terms
+ * of the license agreement you entered into with Linx S.A.
+ */
+
+function arrayToQueryParams(key, values) {
+  return values.map(function (val) {
+    return key + '[]=' + encodeURIComponent(val);
+  }).join('&');
+}
+
+function serializeParams(params) {
+  return (Object.keys(params) || []).map(function (param) {
+    if (Array.isArray(params[param])) {
+      return arrayToQueryParams(param, params[param]);
+    }if (params[param]) {
+      return param + '=' + encodeURIComponent(params[param]);
+    }
+
+    return null;
+  }).filter(function (token) {
+    return !!token;
+  }).join('&');
+}
+
+/**
+ * Default ajax request.
+ *
+ * @memberof module:@linx-impulse/commons-js/http
+ * @method ajax
+ * @param {object} options A set of key/value pairs that configure
+ *          the Ajax request.
+ * @param {object} options.url A string containing the URL to
+ *          which the request is sent. This parameter is obrigatory.
+ * @param {object} [options.type=GET] The method of request.
+ * @param {object} options.params Url query params.
+ * @param {object} options.data Data to be sent to the server.
+ *          It is converted to a query string,
+ * @param {function} options.callback A function to execute always when
+ *          the request is finished.
+ * @param {function} options.success A function to execute when the request
+ *          is successfully finished.
+ * @param {function} options.error A function to execute when some error
+ *          occurs on request.
+ * @param {number} [options.timeout] Specifies the number of milliseconds before
+ *          the request times out. If the request takes longer than `timeout`,
+ *          the request will be aborted. If not provided the request will wait
+ *          indefinitely.
+ */
+function ajax(options) {
+  var callback = typeof options.callback === 'function' ? options.callback : function () {};
+
+  var success = typeof options.success === 'function' ? options.success : function () {};
+
+  var error = typeof options.error === 'function' ? options.error : function () {};
+
+  var requestData = _typeof(options.data) === 'object' ? options.data : {};
+
+  var params = _typeof(options.params) === 'object' ? options.params : {};
+
+  var requestMethod = options.type === undefined || options.type.toUpperCase() !== 'GET' && options.type.toUpperCase() !== 'POST' && options.type.toUpperCase() !== 'PUT' && options.type.toUpperCase() !== 'DELETE' ? 'GET' : options.type.toUpperCase();
+
+  var CPromise = window.Promise || function CPromise(executor) {
+    if (typeof executor === 'function') {
+      executor(
+      // resolve
+      function () {},
+      // reject
+      function () {});
+    }
+  };
+
+  return new CPromise(function (resolve, reject) {
+    if (typeof options.url !== 'string' && options.url === '') {
+      resolve();
+    }
+
+    var queryParams = serializeParams(params);
+    var queryConnector = options.url.indexOf('?') >= 0 ? '&' : '?';
+    var url = '' + options.url + queryConnector + queryParams;
+
+    var _options$timeout = options.timeout,
+        timeout = _options$timeout === undefined ? 0 : _options$timeout;
+
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open(requestMethod, url, true);
+
+    xhr.onload = function (res) {
+      var status = res.target.status;
+
+      var responseData = void 0;
+
+      try {
+        responseData = JSON.parse(xhr.response);
+      } catch (e) {
+        responseData = xhr.response;
+      }
+
+      if (status >= 200 && status < 300) {
+        callback(responseData);
+        success(responseData);
+        resolve(responseData);
+      } else {
+        callback({ status: status, statusText: xhr.statusText });
+        error({ status: status, statusText: xhr.statusText });
+        reject({ status: status, statusText: xhr.statusText });
+      }
+    };
+
+    xhr.onerror = function (res) {
+      var status = res.target.status;
+
+
+      callback({ status: status, statusText: xhr.statusText });
+      error({ status: status, statusText: xhr.statusText });
+      reject({ status: status, statusText: xhr.statusText });
+    };
+
+    xhr.timeout = timeout;
+    xhr.ontimeout = function (err) {
+      callback(err);
+      error(err);
+      reject(err);
+    };
+
+    if (requestMethod !== 'GET') {
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(serializeParams(requestData));
+    } else {
+      xhr.send();
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/banner-client-js/node_modules/@linx-impulse/commons-js/src/util/formatCategories.js":
+/*!************************************************************************************************************************!*\
+  !*** ./node_modules/@linx-impulse/banner-client-js/node_modules/@linx-impulse/commons-js/src/util/formatCategories.js ***!
+  \************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.formatCategories = formatCategories;
+function getChildren(categories, item) {
+  return (categories || []).filter(function (category) {
+    return Array.isArray(category.parents) && category.parents.indexOf(item.id) !== -1;
+  });
+}
+
+function flatten(categories, root, result) {
+  var acc = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+
+  var children = getChildren(categories, root);
+
+  if (!children.length) {
+    result.push(acc);
+  }
+
+  children.forEach(function (child) {
+    flatten(categories, child, result, acc + '_' + child.id);
+  });
+}
+
+/**
+ * Formats an array of categories passed, sorting them
+ * based on hierarchic structure and returns an array
+ * of category ids.
+ *
+ * @memberof module:@linx-impulse/commons-js/util
+ * @method formatCategories
+ * @param {Array} An array of objects, each consisting of a category
+ * with id, name and an array of parents.
+ * @returns {Array} An array of strings where each string represents
+ * one category id.
+ */
+function formatCategories(categories) {
+  // check if categories is an array of strings
+  if (categories.every(function (category) {
+    return typeof category === 'string';
+  })) {
+    return [categories.join('_')];
+  }
+
+  // Filter wrong formatted
+  var filteredCategories = (categories || []).filter(function (category) {
+    return category && category.id;
+  }).map(function (category) {
+    return {
+      id: category.id,
+      parents: category.parents
+    };
+  });
+
+  // Filter the root nodes
+  var roots = filteredCategories.filter(function (category) {
+    return !category.parents || Array.isArray(category.parents) && !category.parents.length;
+  });
+
+  // For each root generate an array of categories
+  var result = [];
+  roots.forEach(function (root) {
+    flatten(categories, root, result, root.id);
+  });
+
+  return result;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/banner-client-js/src/config.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@linx-impulse/banner-client-js/src/config.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  cookieName: {
+    deviceId: 'chaordic_browserId'
+  },
+  server: {
+    baseUrl: '//api.linximpulse.com/engage/b/v1',
+    recommendationUrl: '/recommendations'
+  }
+};
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/banner-client-js/src/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@linx-impulse/banner-client-js/src/index.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BannerClient = undefined;
+
+var _ajax = __webpack_require__(/*! @linx-impulse/commons-js/http/ajax */ "./node_modules/@linx-impulse/banner-client-js/node_modules/@linx-impulse/commons-js/src/http/ajax.js");
+
+var _getCookie = __webpack_require__(/*! @linx-impulse/commons-js/browser/getCookie */ "./node_modules/@linx-impulse/banner-client-js/node_modules/@linx-impulse/commons-js/src/browser/getCookie.js");
+
+var _formatCategories = __webpack_require__(/*! @linx-impulse/commons-js/util/formatCategories */ "./node_modules/@linx-impulse/banner-client-js/node_modules/@linx-impulse/commons-js/src/util/formatCategories.js");
+
+var _config = __webpack_require__(/*! ./config */ "./node_modules/@linx-impulse/banner-client-js/src/config.js");
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function formattedTags(tags) {
+  return (tags || []).map(function (tag) {
+    return tag.id || tag.name;
+  });
+}
+
+/* eslint-disable no-bitwise,no-multi-assign */
+function generateDeviceId() {
+  var s = [];
+  var hexDigits = '0123456789abcdef';
+
+  for (var i = 0; i < 36; i++) {
+    s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+  }
+
+  s[14] = '4';
+  s[19] = hexDigits.substr(s[19] & 0x3 | 0x8, 1);
+  s[8] = s[13] = s[18] = s[23] = '-';
+
+  var deviceId = s.join('');
+
+  deviceId = deviceId.replace(/-/g, '');
+  deviceId += String(Date.now());
+  deviceId += String(Math.floor(Math.random() * 7919 + 1));
+
+  return deviceId;
+}
+/* eslint-enable no-bitwise,no-multi-assign */
+
+function getDeviceId() {
+  var id = (0, _getCookie.getCookie)(_config2.default.cookieName.deviceId);
+
+  if (!id) {
+    id = generateDeviceId();
+  }
+
+  return id;
+}
+
+var BannerClient = exports.BannerClient = {
+  getRecommendations: function getRecommendations() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        page = _ref.page,
+        source = _ref.source,
+        showLayout = _ref.showLayout,
+        userId = _ref.userId,
+        homologation = _ref.homologation,
+        testGroup = _ref.testGroup,
+        timeout = _ref.timeout,
+        categories = _ref.categories,
+        product = _ref.product,
+        tags = _ref.tags,
+        url = _ref.url,
+        searchQuery = _ref.searchQuery;
+
+    if (!page) {
+      return Promise.reject(new TypeError('page is required to get banners'));
+    }
+
+    if (!source) {
+      return Promise.reject(new TypeError('source is required to get banners'));
+    }
+
+    return new Promise(function (resolve, reject) {
+      (0, _ajax.ajax)({
+        url: '' + _config2.default.server.baseUrl + _config2.default.server.recommendationUrl,
+        params: {
+          deviceId: getDeviceId(),
+          page: page,
+          source: source,
+          showLayout: showLayout,
+          userId: userId,
+          homologation: homologation,
+          testGroup: testGroup,
+          categoryId: (0, _formatCategories.formatCategories)(categories),
+          productId: typeof product === 'string' ? product : (product || {}).id,
+          tagId: formattedTags(tags),
+          url: url,
+          searchQuery: searchQuery
+        },
+        success: resolve,
+        error: reject,
+        timeout: timeout
+      });
+    });
+  }
+};
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/commons-js/src/browser/deleteCookie.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@linx-impulse/commons-js/src/browser/deleteCookie.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteCookie = deleteCookie;
+var pastDate = 'expires=Thu, 01 Jan 1970 00:00:01 GMT';
+
+/**
+ * Deletes a page cookie.
+ *
+ * @memberof module:@linx/commons-js/browser
+ * @method deleteCookie
+ * @param {string} name The cookie name.
+ * @param {object} options A key value pair set with method settings.
+ * @param {string} options.domain The domain to set.
+ * @param {string} options.path The path to set.
+ * @param {HTMLDocument} [options.document] The document object to use. If not
+ *  provided, uses the global `window.top.document`.
+ */
+function deleteCookie(name, options) {
+  var opt = options || {};
+  var domain = opt.domain,
+      path = opt.path;
+
+  var doc = opt.document || window.top.document;
+  var keyValues = [name + '=', pastDate];
+
+  if (domain) {
+    keyValues.push('domain=' + domain);
+  }
+
+  if (path) {
+    keyValues.push('path=' + path);
+  }
+
+  doc.cookie = keyValues.join(';');
+}
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/commons-js/src/browser/getCookie.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@linx-impulse/commons-js/src/browser/getCookie.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getCookie = getCookie;
+/* eslint-disable no-useless-escape */
+
+/**
+ * Returns a cookie value by its name
+ *
+ * @memberof module:@linx/commons-js/browser
+ * @method getCookie
+ * @param {string} name The name of cookie to get
+ * @param {object} options A list of key-value pair options.
+ * @param {HTMLDocument} [options.document] The document object to use. If not
+ *  provided, uses the global `window.top.document`.
+ */
+function getCookie(name, options) {
+  var opt = options || {};
+  var doc = opt.document || window.top.document;
+
+  var regex = '(?:(?:^|.*;)\\s*';
+  regex += encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&');
+  regex += '\\s*\\=\\s*([^;]*).*$)|^.*$';
+
+  var value = doc.cookie.replace(new RegExp(regex), '$1');
+  value = decodeURIComponent(value);
+
+  return value || undefined;
+}
+
+/* eslint-enable no-useless-escape */
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/commons-js/src/browser/index.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@linx-impulse/commons-js/src/browser/index.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.stopPropagation = exports.deleteCookie = exports.setCookie = exports.getCookie = exports.isMobile = exports.isInViewport = undefined;
+
+var _getCookie = __webpack_require__(/*! ./getCookie */ "./node_modules/@linx-impulse/commons-js/src/browser/getCookie.js");
+
+var _isInViewport = __webpack_require__(/*! ./isInViewport */ "./node_modules/@linx-impulse/commons-js/src/browser/isInViewport.js");
+
+var _isMobile = __webpack_require__(/*! ./isMobile */ "./node_modules/@linx-impulse/commons-js/src/browser/isMobile.js");
+
+var _setCookie = __webpack_require__(/*! ./setCookie */ "./node_modules/@linx-impulse/commons-js/src/browser/setCookie.js");
+
+var _deleteCookie = __webpack_require__(/*! ./deleteCookie */ "./node_modules/@linx-impulse/commons-js/src/browser/deleteCookie.js");
+
+var _stopPropagation = __webpack_require__(/*! ./stopPropagation */ "./node_modules/@linx-impulse/commons-js/src/browser/stopPropagation.js");
+
+/**
+ * browser module.
+ *
+ * @module @linx/commons-js/browser
+ */
+/*
+ * Linx commons-js.
+ *
+ * A library with common functions implementations for javascript applications.
+ *
+ * Copyright (c) 2018 - Linx S.A
+ *
+ * LICENSE: This software is the confidential and proprietary information of
+ * Linx S.A ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the terms
+ * of the license agreement you entered into with Linx S.A.
+ */
+
+exports.isInViewport = _isInViewport.isInViewport;
+exports.isMobile = _isMobile.isMobile;
+exports.getCookie = _getCookie.getCookie;
+exports.setCookie = _setCookie.setCookie;
+exports.deleteCookie = _deleteCookie.deleteCookie;
+exports.stopPropagation = _stopPropagation.stopPropagation;
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/commons-js/src/browser/isInViewport.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@linx-impulse/commons-js/src/browser/isInViewport.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isInViewport = isInViewport;
+function isInViewport(el, options) {
+  var opt = options || {};
+
+  var win = opt.window || window;
+  var doc = opt.document || document;
+  var rect = el.getBoundingClientRect();
+
+  return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (win.innerHeight || doc.documentElement.clientHeight) && rect.right <= (win.innerWidth || doc.documentElement.clientWidth);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/commons-js/src/browser/isMobile.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@linx-impulse/commons-js/src/browser/isMobile.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isMobile = isMobile;
+/**
+ * Indicates whether the user is using mobile device
+ *
+ * @param {object} options A list of key-value pair options.
+ * @param {Window} [options.window] The window object to use. If not
+ *  provided, uses the global `window.top`.
+ */
+
+/* eslint-disable no-useless-escape */
+var regex = /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i;
+var prefixRegex = /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i;
+/* eslint-enable no-useless-escape */
+
+function isMobile(options) {
+  var opt = options || {};
+  var win = opt.window || window.top;
+
+  var ua = win.navigator.userAgent;
+
+  return regex.test(ua) || prefixRegex.test(ua.substr(0, 4));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/commons-js/src/browser/setCookie.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@linx-impulse/commons-js/src/browser/setCookie.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setCookie = setCookie;
+/* eslint-disable no-useless-escape */
+
+/**
+ * Set a cookie on the browser
+ *
+ * @memberof module:@linx/commons-js/browser
+ * @method setCookie
+ * @param {string} name The name of the cookie
+ * @param {string} value The value to set.
+ * @param {object} options A key value pair set with method settings.
+ * @param {string} options.expires Period to expire the cookie in minutes.
+ * @param {string} options.domain The domain to set.
+ * @param {string} options.path The path to set.
+ * @param {HTMLDocument} [options.document] The document object to use. If not
+ *  provided, uses the global `window.top.document`.
+ * @param {boolean} options.secure Indicates if the flag secure must be set.
+ */
+function setCookie(name, value, options) {
+  var opt = options || {};
+  var expires = opt.expires,
+      path = opt.path,
+      domain = opt.domain,
+      secure = opt.secure;
+
+  var doc = opt.document || window.top.document;
+
+  var expireDate = void 0;
+  if (expires !== Infinity && typeof expires === 'number') {
+    expireDate = new Date();
+    expireDate.setTime(expires.getTime() + expires * 60 * 1000);
+  }
+
+  if (!name || /^(?:expires|max\-age|path|domain|secure)$/i.test(name)) {
+    throw new TypeError('invalid cookie name ' + name);
+  }
+
+  var keyValues = [encodeURIComponent(name) + '=' + encodeURIComponent(value)];
+
+  if (expireDate) {
+    keyValues.push('expires=' + expireDate);
+  }
+
+  if (domain) {
+    keyValues.push('domain=' + domain);
+  }
+
+  if (path) {
+    keyValues.push('path=' + path);
+  }
+
+  if (secure) {
+    keyValues.push('secure');
+  }
+
+  doc.cookie = keyValues.join(';');
+
+  return true;
+}
+
+/* eslint-enable no-useless-escape */
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/commons-js/src/browser/stopPropagation.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@linx-impulse/commons-js/src/browser/stopPropagation.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.stopPropagation = stopPropagation;
+/**
+ * Calls functions to prevent further propagation
+ * of a given event in the capturing and bubbling phases.
+ *
+ * @memberof module:@linx/commons-js/browser
+ * @method stopPropagation
+ * @param {object} event The event whose functions will be called
+ */
+function stopPropagation(event) {
+  if (event.preventDefault && typeof event.preventDefault === 'function') {
+    event.preventDefault();
+  }
+
+  if (event.stopPropagation && typeof event.stopPropagation === 'function') {
+    event.stopPropagation();
+  }
+
+  // eslint-disable-next-line no-param-reassign
+  event.cancelBubble = true;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/commons-js/src/http/ajax.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@linx-impulse/commons-js/src/http/ajax.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.ajax = ajax;
+/*
+ * Linx commons-js.
+ *
+ * A library with common functions implementations for javascript applications.
+ *
+ * Copyright (c) 2018 - Linx S.A
+ *
+ * LICENSE: This software is the confidential and proprietary information of
+ * Linx S.A ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the terms
+ * of the license agreement you entered into with Linx S.A.
+ */
+
+function arrayToQueryParams(key, values) {
+  return values.map(function (val) {
+    return key + '[]=' + encodeURIComponent(val);
+  }).join('&');
+}
+
+function serializeParams(params) {
+  return (Object.keys(params) || []).map(function (param) {
+    if (Array.isArray(params[param])) {
+      return arrayToQueryParams(param, params[param]);
+    }if (params[param]) {
+      return param + '=' + encodeURIComponent(params[param]);
+    }
+
+    return null;
+  }).filter(function (token) {
+    return !!token;
+  }).join('&');
+}
+
+/**
+ * Default ajax request.
+ *
+ * @memberof module:@linx/commons-js/http
+ * @method ajax
+ * @param {object} options A set of key/value pairs that configure
+ *          the Ajax request.
+ * @param {object} options.url A string containing the URL to
+ *          which the request is sent. This parameter is obrigatory.
+ * @param {object} [options.type=GET] The method of request.
+ * @param {object} options.params Url query params.
+ * @param {object} options.data Data to be sent to the server.
+ *          It is converted to a query string,
+ * @param {function} options.callback A function to execute always when
+ *          the request is finished.
+ * @param {function} options.success A function to execute when the request
+ *          is successfully finished.
+ * @param {function} options.error A function to execute when some error
+ *          occurs on request.
+ * @param {number} [options.timeout] Specifies the number of milliseconds before
+ *          the request times out. If the request takes longer than `timeout`,
+ *          the request will be aborted. If not provided the request will wait
+ *          indefinitely.
+ */
+function ajax(options) {
+  var callback = typeof options.callback === 'function' ? options.callback : function () {};
+
+  var success = typeof options.success === 'function' ? options.success : function () {};
+
+  var error = typeof options.error === 'function' ? options.error : function () {};
+
+  var requestData = _typeof(options.data) === 'object' ? options.data : {};
+
+  var params = _typeof(options.params) === 'object' ? options.params : {};
+
+  var requestMethod = options.type === undefined || options.type.toUpperCase() !== 'GET' && options.type.toUpperCase() !== 'POST' && options.type.toUpperCase() !== 'PUT' && options.type.toUpperCase() !== 'DELETE' ? 'GET' : options.type.toUpperCase();
+
+  if (typeof options.url !== 'string' && options.url === '') {
+    return;
+  }
+
+  var queryParams = serializeParams(params);
+  var queryConnector = options.url.indexOf('?') >= 0 ? '&' : '?';
+  var url = '' + options.url + queryConnector + queryParams;
+
+  var _options$timeout = options.timeout,
+      timeout = _options$timeout === undefined ? 0 : _options$timeout;
+
+
+  var xhr = new XMLHttpRequest();
+  xhr.open(requestMethod, url, true);
+
+  xhr.onload = function (res) {
+    var status = res.target.status;
+
+    var responseData = void 0;
+
+    try {
+      responseData = JSON.parse(xhr.response);
+    } catch (e) {
+      responseData = xhr.response;
+    }
+
+    if (status >= 200 && status < 300) {
+      callback(responseData);
+      success(responseData);
+    } else {
+      callback({ status: status, statusText: xhr.statusText });
+      error({ status: status, statusText: xhr.statusText });
+    }
+  };
+
+  xhr.onerror = function (res) {
+    var status = res.target.status;
+
+
+    callback({ status: status, statusText: xhr.statusText });
+    error({ status: status, statusText: xhr.statusText });
+  };
+
+  xhr.timeout = timeout;
+  xhr.ontimeout = function (err) {
+    callback(err);
+    error(err);
+  };
+
+  if (requestMethod !== 'GET') {
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(serializeParams(requestData));
+  } else {
+    xhr.send();
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/@linx-impulse/commons-js/src/query-string/parse.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@linx-impulse/commons-js/src/query-string/parse.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.parse = parse;
+function addToObj(parameters, key, value) {
+  var innerObj = parameters;
+  var decodedValue = decodeURIComponent(value);
+  var decodedKey = decodeURIComponent(key);
+
+  if (typeof innerObj[decodedKey] === 'string') {
+    innerObj[decodedKey] = [innerObj[decodedKey], decodedValue];
+  } else if (Array.isArray(innerObj[decodedKey])) {
+    innerObj[decodedKey].push(decodedValue);
+  } else if (decodedKey) {
+    innerObj[decodedKey] = decodedValue;
+  }
+  return innerObj;
+}
+
+/**
+ * Parse a query string and return the object with
+ * the parameters and values
+ *
+ * @memberof module:@linx/commons-js/query-string
+ * @method parse
+ * @param {string} query The query to be parsed
+ * @returns {object} parameters The object to be returned with the parameters
+ */
+function parse(query) {
+  if (typeof query !== 'string') {
+    return {};
+  }
+
+  var arrayVars = query.split('&');
+
+  return arrayVars.reduce(function (parameters, element) {
+    var _element$split = element.split('='),
+        _element$split2 = _slicedToArray(_element$split, 2),
+        key = _element$split2[0],
+        value = _element$split2[1];
+
+    return addToObj(parameters, key, value);
+  }, {});
+}
+
+/***/ }),
+
+/***/ "./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+@license @nocompile
+Copyright (c) 2018 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+(function () {
+    '';
+
+    (function(){if(void 0===window.Reflect||void 0===window.customElements||window.customElements.polyfillWrapFlushCallback)return;const a=HTMLElement;window.HTMLElement={HTMLElement:function HTMLElement(){return Reflect.construct(a,[],this.constructor)}}.HTMLElement,HTMLElement.prototype=a.prototype,HTMLElement.prototype.constructor=HTMLElement,Object.setPrototypeOf(HTMLElement,a);})();
+
+}());
+
+
+/***/ }),
+
+/***/ "./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * @license
+ * Copyright (c) 2018 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also
+ * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ */
+
+(function () {
+  '';
+
+  /**
+   * Basic flow of the loader process
+   *
+   * There are 4 flows the loader can take when booting up
+   *
+   * - Synchronous script, no polyfills needed
+   *   - wait for `DOMContentLoaded`
+   *   - fire WCR event, as there could not be any callbacks passed to `waitFor`
+   *
+   * - Synchronous script, polyfills needed
+   *   - document.write the polyfill bundle
+   *   - wait on the `load` event of the bundle to batch Custom Element upgrades
+   *   - wait for `DOMContentLoaded`
+   *   - run callbacks passed to `waitFor`
+   *   - fire WCR event
+   *
+   * - Asynchronous script, no polyfills needed
+   *   - wait for `DOMContentLoaded`
+   *   - run callbacks passed to `waitFor`
+   *   - fire WCR event
+   *
+   * - Asynchronous script, polyfills needed
+   *   - Append the polyfill bundle script
+   *   - wait for `load` event of the bundle
+   *   - batch Custom Element Upgrades
+   *   - run callbacks pass to `waitFor`
+   *   - fire WCR event
+   */
+
+  var polyfillsLoaded = false;
+  var whenLoadedFns = [];
+  var allowUpgrades = false;
+  var flushFn;
+
+  function fireEvent() {
+    window.WebComponents.ready = true;
+    document.dispatchEvent(
+      new CustomEvent('WebComponentsReady', {bubbles: true})
+    );
+  }
+
+  function batchCustomElements() {
+    if (window.customElements && customElements.polyfillWrapFlushCallback) {
+      customElements.polyfillWrapFlushCallback(function (flushCallback) {
+        flushFn = flushCallback;
+        if (allowUpgrades) {
+          flushFn();
+        }
+      });
+    }
+  }
+
+  function asyncReady() {
+    batchCustomElements();
+    ready();
+  }
+
+  function ready() {
+    // bootstrap <template> elements before custom elements
+    if (window.HTMLTemplateElement && HTMLTemplateElement.bootstrap) {
+      HTMLTemplateElement.bootstrap(window.document);
+    }
+    polyfillsLoaded = true;
+    runWhenLoadedFns().then(fireEvent);
+  }
+
+  function runWhenLoadedFns() {
+    allowUpgrades = false;
+    var fnsMap = whenLoadedFns.map(function (fn) {
+      return fn instanceof Function ? fn() : fn;
+    });
+    whenLoadedFns = [];
+    return Promise.all(fnsMap)
+      .then(function () {
+        allowUpgrades = true;
+        flushFn && flushFn();
+      })
+      .catch(function (err) {
+        console.error(err);
+      });
+  }
+
+  window.WebComponents = window.WebComponents || {};
+  window.WebComponents.ready = window.WebComponents.ready || false;
+  window.WebComponents.waitFor =
+    window.WebComponents.waitFor ||
+    function (waitFn) {
+      if (!waitFn) {
+        return;
+      }
+      whenLoadedFns.push(waitFn);
+      if (polyfillsLoaded) {
+        runWhenLoadedFns();
+      }
+    };
+  window.WebComponents._batchCustomElements = batchCustomElements;
+
+  var name = 'webcomponents-loader.js';
+  // Feature detect which polyfill needs to be imported.
+  var polyfills = [];
+  if (
+    !(
+      'attachShadow' in Element.prototype && 'getRootNode' in Element.prototype
+    ) ||
+    (window.ShadyDOM && window.ShadyDOM.force)
+  ) {
+    polyfills.push('sd');
+  }
+  if (!window.customElements || window.customElements.forcePolyfill) {
+    polyfills.push('ce');
+  }
+
+  var needsTemplate = (function () {
+    // no real <template> because no `content` property (IE and older browsers)
+    var t = document.createElement('template');
+    if (!('content' in t)) {
+      return true;
+    }
+    // broken doc fragment (older Edge)
+    if (!(t.content.cloneNode() instanceof DocumentFragment)) {
+      return true;
+    }
+    // broken <template> cloning (Edge up to at least version 17)
+    var t2 = document.createElement('template');
+    t2.content.appendChild(document.createElement('div'));
+    t.content.appendChild(t2);
+    var clone = t.cloneNode(true);
+    return (
+      clone.content.childNodes.length === 0 ||
+      clone.content.firstChild.content.childNodes.length === 0
+    );
+  })();
+
+  // NOTE: any browser that does not have template or ES6 features
+  // must load the full suite of polyfills.
+  if (
+    !window.Promise ||
+    !Array.from ||
+    !window.URL ||
+    !window.Symbol ||
+    needsTemplate
+  ) {
+    polyfills = ['sd-ce-pf'];
+  }
+
+  if (polyfills.length) {
+    // When the Trusted Types API is available, `policy` is a
+    // `TrustedTypePolicy` with functions for creating trusted HTML, scripts,
+    // and script URLs. This policy is used below to (a) approve the bundle URL
+    // string created by the loader that is assigned to a `<script>`'s `src`
+    // attribute, (b) approve a constant script string that is assigned to that
+    // `<script>'s `onload` attribute, and (c) approve the string of HTML that
+    // the loader reads from that `<script>`'s `outerHTML`.
+    //
+    // If the Trusted Types API is not available, the returned object exposes a
+    // similar interface to a `TrustedTypePolicy`, but all of its functions are
+    // the identity function.
+    var policy = (function () {
+      var identity = function (x) {
+        return x;
+      };
+      var policyOptions = {
+        createHTML: identity,
+        createScript: identity,
+        createScriptURL: identity,
+      };
+      var policy =
+        window.trustedTypes &&
+        window.trustedTypes.createPolicy('webcomponents-loader', policyOptions);
+      return policy || policyOptions;
+    })();
+
+    var url;
+    var polyfillFile = 'bundles/webcomponents-' + polyfills.join('-') + '.js';
+
+    // Load it from the right place.
+    if (window.WebComponents.root) {
+      url = window.WebComponents.root + polyfillFile;
+      if (
+        window.trustedTypes &&
+        window.trustedTypes.isScriptURL(window.WebComponents.root)
+      ) {
+        url = policy.createScriptURL(url);
+      }
+    } else {
+      var script = document.querySelector('script[src*="' + name + '"]');
+      // Load it from the right place.
+      url = policy.createScriptURL(script.src.replace(name, polyfillFile));
+    }
+
+    var newScript = document.createElement('script');
+    newScript.src = url;
+    // if readyState is 'loading', this script is synchronous
+    if (document.readyState === 'loading') {
+      // make sure custom elements are batched whenever parser gets to the injected script
+      newScript.setAttribute(
+        'onload',
+        policy.createScript('window.WebComponents._batchCustomElements()')
+      );
+      document.write(policy.createHTML(newScript.outerHTML));
+      document.addEventListener('DOMContentLoaded', ready);
+    } else {
+      newScript.addEventListener('load', function () {
+        asyncReady();
+      });
+      newScript.addEventListener('error', function () {
+        throw new Error('Could not load polyfill bundle' + url);
+      });
+      document.head.appendChild(newScript);
+    }
+  } else {
+    // if readyState is 'complete', script is loaded imperatively on a spec-compliant browser, so just fire WCR
+    if (document.readyState === 'complete') {
+      polyfillsLoaded = true;
+      fireEvent();
+    } else {
+      // this script may come between DCL and load, so listen for both, and cancel load listener if DCL fires
+      window.addEventListener('load', ready);
+      window.addEventListener('DOMContentLoaded', function () {
+        window.removeEventListener('load', ready);
+        ready();
+      });
+    }
+  }
+})();
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/ejs/ejs.js":
+/*!*********************************!*\
+  !*** ./node_modules/ejs/ejs.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var require;var require;(function(f){if(true){module.exports=f()}else { var g; }})(function(){var define,module,exports;return (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return require(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
+/*
+ * EJS Embedded JavaScript templates
+ * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+*/
+
+'';
+
+/**
+ * @file Embedded JavaScript templating engine. {@link http://ejs.co}
+ * @author Matthew Eernisse <mde@fleegix.org>
+ * @author Tiancheng "Timothy" Gu <timothygu99@gmail.com>
+ * @project EJS
+ * @license {@link http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0}
+ */
+
+/**
+ * EJS internal functions.
+ *
+ * Technically this "module" lies in the same file as {@link module:ejs}, for
+ * the sake of organization all the private functions re grouped into this
+ * module.
+ *
+ * @module ejs-internal
+ * @private
+ */
+
+/**
+ * Embedded JavaScript templating engine.
+ *
+ * @module ejs
+ * @public
+ */
+
+var fs = require('fs');
+var path = require('path');
+var utils = require('./utils');
+
+var scopeOptionWarned = false;
+var _VERSION_STRING = require('../package.json').version;
+var _DEFAULT_DELIMITER = '%';
+var _DEFAULT_LOCALS_NAME = 'locals';
+var _NAME = 'ejs';
+var _REGEX_STRING = '(<%%|%%>|<%=|<%-|<%_|<%#|<%|%>|-%>|_%>)';
+var _OPTS = ['delimiter', 'scope', 'context', 'debug', 'compileDebug',
+  'client', '_with', 'rmWhitespace', 'strict', 'filename'];
+// We don't allow 'cache' option to be passed in the data obj
+// for the normal `render` call, but this is where Express puts it
+// so we make an exception for `renderFile`
+var _OPTS_EXPRESS = _OPTS.concat('cache');
+var _BOM = /^\uFEFF/;
+
+/**
+ * EJS template function cache. This can be a LRU object from lru-cache NPM
+ * module. By default, it is {@link module:utils.cache}, a simple in-process
+ * cache that grows continuously.
+ *
+ * @type {Cache}
+ */
+
+exports.cache = utils.cache;
+
+/**
+ * Custom file loader. Useful for template preprocessing or restricting access
+ * to a certain part of the filesystem.
+ *
+ * @type {fileLoader}
+ */
+
+exports.fileLoader = fs.readFileSync;
+
+/**
+ * Name of the object containing the locals.
+ *
+ * This variable is overridden by {@link Options}`.localsName` if it is not
+ * `undefined`.
+ *
+ * @type {String}
+ * @public
+ */
+
+exports.localsName = _DEFAULT_LOCALS_NAME;
+
+/**
+ * Promise implementation -- defaults to the native implementation if available
+ * This is mostly just for testability
+ *
+ * @type {Function}
+ * @public
+ */
+
+exports.promiseImpl = (new Function('return this;'))().Promise;
+
+/**
+ * Get the path to the included file from the parent file path and the
+ * specified path.
+ *
+ * @param {String}  name     specified path
+ * @param {String}  filename parent file path
+ * @param {Boolean} isDir    parent file path whether is directory
+ * @return {String}
+ */
+exports.resolveInclude = function(name, filename, isDir) {
+  var dirname = path.dirname;
+  var extname = path.extname;
+  var resolve = path.resolve;
+  var includePath = resolve(isDir ? filename : dirname(filename), name);
+  var ext = extname(name);
+  if (!ext) {
+    includePath += '.ejs';
+  }
+  return includePath;
+};
+
+/**
+ * Get the path to the included file by Options
+ *
+ * @param  {String}  path    specified path
+ * @param  {Options} options compilation options
+ * @return {String}
+ */
+function getIncludePath(path, options) {
+  var includePath;
+  var filePath;
+  var views = options.views;
+
+  // Abs path
+  if (path.charAt(0) == '/') {
+    includePath = exports.resolveInclude(path.replace(/^\/*/,''), options.root || '/', true);
+  }
+  // Relative paths
+  else {
+    // Look relative to a passed filename first
+    if (options.filename) {
+      filePath = exports.resolveInclude(path, options.filename);
+      if (fs.existsSync(filePath)) {
+        includePath = filePath;
+      }
+    }
+    // Then look in any views directories
+    if (!includePath) {
+      if (Array.isArray(views) && views.some(function (v) {
+        filePath = exports.resolveInclude(path, v, true);
+        return fs.existsSync(filePath);
+      })) {
+        includePath = filePath;
+      }
+    }
+    if (!includePath) {
+      throw new Error('Could not find the include file "' +
+          options.escapeFunction(path) + '"');
+    }
+  }
+  return includePath;
+}
+
+/**
+ * Get the template from a string or a file, either compiled on-the-fly or
+ * read from cache (if enabled), and cache the template if needed.
+ *
+ * If `template` is not set, the file specified in `options.filename` will be
+ * read.
+ *
+ * If `options.cache` is true, this function reads the file from
+ * `options.filename` so it must be set prior to calling this function.
+ *
+ * @memberof module:ejs-internal
+ * @param {Options} options   compilation options
+ * @param {String} [template] template source
+ * @return {(TemplateFunction|ClientFunction)}
+ * Depending on the value of `options.client`, either type might be returned.
+ * @static
+ */
+
+function handleCache(options, template) {
+  var func;
+  var filename = options.filename;
+  var hasTemplate = arguments.length > 1;
+
+  if (options.cache) {
+    if (!filename) {
+      throw new Error('cache option requires a filename');
+    }
+    func = exports.cache.get(filename);
+    if (func) {
+      return func;
+    }
+    if (!hasTemplate) {
+      template = fileLoader(filename).toString().replace(_BOM, '');
+    }
+  }
+  else if (!hasTemplate) {
+    // istanbul ignore if: should not happen at all
+    if (!filename) {
+      throw new Error('Internal EJS error: no file name or template '
+                    + 'provided');
+    }
+    template = fileLoader(filename).toString().replace(_BOM, '');
+  }
+  func = exports.compile(template, options);
+  if (options.cache) {
+    exports.cache.set(filename, func);
+  }
+  return func;
+}
+
+/**
+ * Try calling handleCache with the given options and data and call the
+ * callback with the result. If an error occurs, call the callback with
+ * the error. Used by renderFile().
+ *
+ * @memberof module:ejs-internal
+ * @param {Options} options    compilation options
+ * @param {Object} data        template data
+ * @param {RenderFileCallback} cb callback
+ * @static
+ */
+
+function tryHandleCache(options, data, cb) {
+  var result;
+  if (!cb) {
+    if (typeof exports.promiseImpl == 'function') {
+      return new exports.promiseImpl(function (resolve, reject) {
+        try {
+          result = handleCache(options)(data);
+          resolve(result);
+        }
+        catch (err) {
+          reject(err);
+        }
+      });
+    }
+    else {
+      throw new Error('Please provide a callback function');
+    }
+  }
+  else {
+    try {
+      result = handleCache(options)(data);
+    }
+    catch (err) {
+      return cb(err);
+    }
+
+    cb(null, result);
+  }
+}
+
+/**
+ * fileLoader is independent
+ *
+ * @param {String} filePath ejs file path.
+ * @return {String} The contents of the specified file.
+ * @static
+ */
+
+function fileLoader(filePath){
+  return exports.fileLoader(filePath);
+}
+
+/**
+ * Get the template function.
+ *
+ * If `options.cache` is `true`, then the template is cached.
+ *
+ * @memberof module:ejs-internal
+ * @param {String}  path    path for the specified file
+ * @param {Options} options compilation options
+ * @return {(TemplateFunction|ClientFunction)}
+ * Depending on the value of `options.client`, either type might be returned
+ * @static
+ */
+
+function includeFile(path, options) {
+  var opts = utils.shallowCopy({}, options);
+  opts.filename = getIncludePath(path, opts);
+  return handleCache(opts);
+}
+
+/**
+ * Get the JavaScript source of an included file.
+ *
+ * @memberof module:ejs-internal
+ * @param {String}  path    path for the specified file
+ * @param {Options} options compilation options
+ * @return {Object}
+ * @static
+ */
+
+function includeSource(path, options) {
+  var opts = utils.shallowCopy({}, options);
+  var includePath;
+  var template;
+  includePath = getIncludePath(path, opts);
+  template = fileLoader(includePath).toString().replace(_BOM, '');
+  opts.filename = includePath;
+  var templ = new Template(template, opts);
+  templ.generateSource();
+  return {
+    source: templ.source,
+    filename: includePath,
+    template: template
+  };
+}
+
+/**
+ * Re-throw the given `err` in context to the `str` of ejs, `filename`, and
+ * `lineno`.
+ *
+ * @implements RethrowCallback
+ * @memberof module:ejs-internal
+ * @param {Error}  err      Error object
+ * @param {String} str      EJS source
+ * @param {String} filename file name of the EJS file
+ * @param {String} lineno   line number of the error
+ * @static
+ */
+
+function rethrow(err, str, flnm, lineno, esc){
+  var lines = str.split('\n');
+  var start = Math.max(lineno - 3, 0);
+  var end = Math.min(lines.length, lineno + 3);
+  var filename = esc(flnm); // eslint-disable-line
+  // Error context
+  var context = lines.slice(start, end).map(function (line, i){
+    var curr = i + start + 1;
+    return (curr == lineno ? ' >> ' : '    ')
+      + curr
+      + '| '
+      + line;
+  }).join('\n');
+
+  // Alter exception message
+  err.path = filename;
+  err.message = (filename || 'ejs') + ':'
+    + lineno + '\n'
+    + context + '\n\n'
+    + err.message;
+
+  throw err;
+}
+
+function stripSemi(str){
+  return str.replace(/;(\s*$)/, '$1');
+}
+
+/**
+ * Compile the given `str` of ejs into a template function.
+ *
+ * @param {String}  template EJS template
+ *
+ * @param {Options} opts     compilation options
+ *
+ * @return {(TemplateFunction|ClientFunction)}
+ * Depending on the value of `opts.client`, either type might be returned.
+ * @public
+ */
+
+exports.compile = function compile(template, opts) {
+  var templ;
+
+  // v1 compat
+  // 'scope' is 'context'
+  // FIXME: Remove this in a future version
+  if (opts && opts.scope) {
+    if (!scopeOptionWarned){
+      console.warn('`scope` option is deprecated and will be removed in EJS 3');
+      scopeOptionWarned = true;
+    }
+    if (!opts.context) {
+      opts.context = opts.scope;
+    }
+    delete opts.scope;
+  }
+  templ = new Template(template, opts);
+  return templ.compile();
+};
+
+/**
+ * Render the given `template` of ejs.
+ *
+ * If you would like to include options but not data, you need to explicitly
+ * call this function with `data` being an empty object or `null`.
+ *
+ * @param {String}   template EJS template
+ * @param {Object}  [data={}] template data
+ * @param {Options} [opts={}] compilation and rendering options
+ * @return {String}
+ * @public
+ */
+
+exports.render = function (template, d, o) {
+  var data = d || {};
+  var opts = o || {};
+
+  // No options object -- if there are optiony names
+  // in the data, copy them to options
+  if (arguments.length == 2) {
+    utils.shallowCopyFromList(opts, data, _OPTS);
+  }
+
+  return handleCache(opts, template)(data);
+};
+
+/**
+ * Render an EJS file at the given `path` and callback `cb(err, str)`.
+ *
+ * If you would like to include options but not data, you need to explicitly
+ * call this function with `data` being an empty object or `null`.
+ *
+ * @param {String}             path     path to the EJS file
+ * @param {Object}            [data={}] template data
+ * @param {Options}           [opts={}] compilation and rendering options
+ * @param {RenderFileCallback} cb callback
+ * @public
+ */
+
+exports.renderFile = function () {
+  var args = Array.prototype.slice.call(arguments);
+  var filename = args.shift();
+  var cb;
+  var opts = {filename: filename};
+  var data;
+
+  // Do we have a callback?
+  if (typeof arguments[arguments.length - 1] == 'function') {
+    cb = args.pop();
+  }
+  // Do we have data/opts?
+  if (args.length) {
+    // Should always have data obj
+    data = args.shift();
+    // Normal passed opts (data obj + opts obj)
+    if (args.length) {
+      // Use shallowCopy so we don't pollute passed in opts obj with new vals
+      utils.shallowCopy(opts, args.pop());
+    }
+    // Special casing for Express (opts-in-data)
+    else {
+      // Express 4
+      if (data.settings) {
+        if (data.settings.views) {
+          opts.views = data.settings.views;
+        }
+        if (data.settings['view cache']) {
+          opts.cache = true;
+        }
+      }
+      // Express 3 and lower
+      else {
+        utils.shallowCopyFromList(opts, data, _OPTS_EXPRESS);
+      }
+    }
+    opts.filename = filename;
+  }
+  else {
+    data = {};
+  }
+
+  return tryHandleCache(opts, data, cb);
+};
+
+/**
+ * Clear intermediate JavaScript cache. Calls {@link Cache#reset}.
+ * @public
+ */
+
+exports.clearCache = function () {
+  exports.cache.reset();
+};
+
+function Template(text, opts) {
+  opts = opts || {};
+  var options = {};
+  this.templateText = text;
+  this.mode = null;
+  this.truncate = false;
+  this.currentLine = 1;
+  this.source = '';
+  this.dependencies = [];
+  options.client = opts.client || false;
+  options.escapeFunction = opts.escape || utils.escapeXML;
+  options.compileDebug = opts.compileDebug !== false;
+  options.debug = !!opts.debug;
+  options.filename = opts.filename;
+  options.delimiter = opts.delimiter || exports.delimiter || _DEFAULT_DELIMITER;
+  options.strict = opts.strict || false;
+  options.context = opts.context;
+  options.cache = opts.cache || false;
+  options.rmWhitespace = opts.rmWhitespace;
+  options.root = opts.root;
+  options.localsName = opts.localsName || exports.localsName || _DEFAULT_LOCALS_NAME;
+  options.views = opts.views;
+
+  if (options.strict) {
+    options._with = false;
+  }
+  else {
+    options._with = typeof opts._with != 'undefined' ? opts._with : true;
+  }
+
+  this.opts = options;
+
+  this.regex = this.createRegex();
+}
+
+Template.modes = {
+  EVAL: 'eval',
+  ESCAPED: 'escaped',
+  RAW: 'raw',
+  COMMENT: 'comment',
+  LITERAL: 'literal'
+};
+
+Template.prototype = {
+  createRegex: function () {
+    var str = _REGEX_STRING;
+    var delim = utils.escapeRegExpChars(this.opts.delimiter);
+    str = str.replace(/%/g, delim);
+    return new RegExp(str);
+  },
+
+  compile: function () {
+    var src;
+    var fn;
+    var opts = this.opts;
+    var prepended = '';
+    var appended = '';
+    var escapeFn = opts.escapeFunction;
+
+    if (!this.source) {
+      this.generateSource();
+      prepended += '  var __output = [], __append = __output.push.bind(__output);' + '\n';
+      if (opts._with !== false) {
+        prepended +=  '  with (' + opts.localsName + ' || {}) {' + '\n';
+        appended += '  }' + '\n';
+      }
+      appended += '  return __output.join("");' + '\n';
+      this.source = prepended + this.source + appended;
+    }
+
+    if (opts.compileDebug) {
+      src = 'var __line = 1' + '\n'
+        + '  , __lines = ' + JSON.stringify(this.templateText) + '\n'
+        + '  , __filename = ' + (opts.filename ?
+        JSON.stringify(opts.filename) : 'undefined') + ';' + '\n'
+        + 'try {' + '\n'
+        + this.source
+        + '} catch (e) {' + '\n'
+        + '  rethrow(e, __lines, __filename, __line, escapeFn);' + '\n'
+        + '}' + '\n';
+    }
+    else {
+      src = this.source;
+    }
+
+    if (opts.client) {
+      src = 'escapeFn = escapeFn || ' + escapeFn.toString() + ';' + '\n' + src;
+      if (opts.compileDebug) {
+        src = 'rethrow = rethrow || ' + rethrow.toString() + ';' + '\n' + src;
+      }
+    }
+
+    if (opts.strict) {
+      src = '"";\n' + src;
+    }
+    if (opts.debug) {
+      console.log(src);
+    }
+
+    try {
+      fn = new Function(opts.localsName + ', escapeFn, include, rethrow', src);
+    }
+    catch(e) {
+      // istanbul ignore else
+      if (e instanceof SyntaxError) {
+        if (opts.filename) {
+          e.message += ' in ' + opts.filename;
+        }
+        e.message += ' while compiling ejs\n\n';
+        e.message += 'If the above error is not helpful, you may want to try EJS-Lint:\n';
+        e.message += 'https://github.com/RyanZim/EJS-Lint';
+      }
+      throw e;
+    }
+
+    if (opts.client) {
+      fn.dependencies = this.dependencies;
+      return fn;
+    }
+
+    // Return a callable function which will execute the function
+    // created by the source-code, with the passed data as locals
+    // Adds a local `include` function which allows full recursive include
+    var returnedFn = function (data) {
+      var include = function (path, includeData) {
+        var d = utils.shallowCopy({}, data);
+        if (includeData) {
+          d = utils.shallowCopy(d, includeData);
+        }
+        return includeFile(path, opts)(d);
+      };
+      return fn.apply(opts.context, [data || {}, escapeFn, include, rethrow]);
+    };
+    returnedFn.dependencies = this.dependencies;
+    return returnedFn;
+  },
+
+  generateSource: function () {
+    var opts = this.opts;
+
+    if (opts.rmWhitespace) {
+      // Have to use two separate replace here as `^` and `$` operators don't
+      // work well with `\r`.
+      this.templateText =
+        this.templateText.replace(/\r/g, '').replace(/^\s+|\s+$/gm, '');
+    }
+
+    // Slurp spaces and tabs before <%_ and after _%>
+    this.templateText =
+      this.templateText.replace(/[ \t]*<%_/gm, '<%_').replace(/_%>[ \t]*/gm, '_%>');
+
+    var self = this;
+    var matches = this.parseTemplateText();
+    var d = this.opts.delimiter;
+
+    if (matches && matches.length) {
+      matches.forEach(function (line, index) {
+        var opening;
+        var closing;
+        var include;
+        var includeOpts;
+        var includeObj;
+        var includeSrc;
+        // If this is an opening tag, check for closing tags
+        // FIXME: May end up with some false positives here
+        // Better to store modes as k/v with '<' + delimiter as key
+        // Then this can simply check against the map
+        if ( line.indexOf('<' + d) === 0        // If it is a tag
+          && line.indexOf('<' + d + d) !== 0) { // and is not escaped
+          closing = matches[index + 2];
+          if (!(closing == d + '>' || closing == '-' + d + '>' || closing == '_' + d + '>')) {
+            throw new Error('Could not find matching close tag for "' + line + '".');
+          }
+        }
+        // HACK: backward-compat `include` preprocessor directives
+        if ((include = line.match(/^\s*include\s+(\S+)/))) {
+          opening = matches[index - 1];
+          // Must be in EVAL or RAW mode
+          if (opening && (opening == '<' + d || opening == '<' + d + '-' || opening == '<' + d + '_')) {
+            includeOpts = utils.shallowCopy({}, self.opts);
+            includeObj = includeSource(include[1], includeOpts);
+            if (self.opts.compileDebug) {
+              includeSrc =
+                  '    ; (function(){' + '\n'
+                  + '      var __line = 1' + '\n'
+                  + '      , __lines = ' + JSON.stringify(includeObj.template) + '\n'
+                  + '      , __filename = ' + JSON.stringify(includeObj.filename) + ';' + '\n'
+                  + '      try {' + '\n'
+                  + includeObj.source
+                  + '      } catch (e) {' + '\n'
+                  + '        rethrow(e, __lines, __filename, __line, escapeFn);' + '\n'
+                  + '      }' + '\n'
+                  + '    ; }).call(this)' + '\n';
+            }else{
+              includeSrc = '    ; (function(){' + '\n' + includeObj.source +
+                  '    ; }).call(this)' + '\n';
+            }
+            self.source += includeSrc;
+            self.dependencies.push(exports.resolveInclude(include[1],
+              includeOpts.filename));
+            return;
+          }
+        }
+        self.scanLine(line);
+      });
+    }
+
+  },
+
+  parseTemplateText: function () {
+    var str = this.templateText;
+    var pat = this.regex;
+    var result = pat.exec(str);
+    var arr = [];
+    var firstPos;
+
+    while (result) {
+      firstPos = result.index;
+
+      if (firstPos !== 0) {
+        arr.push(str.substring(0, firstPos));
+        str = str.slice(firstPos);
+      }
+
+      arr.push(result[0]);
+      str = str.slice(result[0].length);
+      result = pat.exec(str);
+    }
+
+    if (str) {
+      arr.push(str);
+    }
+
+    return arr;
+  },
+
+  _addOutput: function (line) {
+    if (this.truncate) {
+      // Only replace single leading linebreak in the line after
+      // -%> tag -- this is the single, trailing linebreak
+      // after the tag that the truncation mode replaces
+      // Handle Win / Unix / old Mac linebreaks -- do the \r\n
+      // combo first in the regex-or
+      line = line.replace(/^(?:\r\n|\r|\n)/, '');
+      this.truncate = false;
+    }
+    else if (this.opts.rmWhitespace) {
+      // rmWhitespace has already removed trailing spaces, just need
+      // to remove linebreaks
+      line = line.replace(/^\n/, '');
+    }
+    if (!line) {
+      return line;
+    }
+
+    // Preserve literal slashes
+    line = line.replace(/\\/g, '\\\\');
+
+    // Convert linebreaks
+    line = line.replace(/\n/g, '\\n');
+    line = line.replace(/\r/g, '\\r');
+
+    // Escape double-quotes
+    // - this will be the delimiter during execution
+    line = line.replace(/"/g, '\\"');
+    this.source += '    ; __append("' + line + '")' + '\n';
+  },
+
+  scanLine: function (line) {
+    var self = this;
+    var d = this.opts.delimiter;
+    var newLineCount = 0;
+
+    newLineCount = (line.split('\n').length - 1);
+
+    switch (line) {
+    case '<' + d:
+    case '<' + d + '_':
+      this.mode = Template.modes.EVAL;
+      break;
+    case '<' + d + '=':
+      this.mode = Template.modes.ESCAPED;
+      break;
+    case '<' + d + '-':
+      this.mode = Template.modes.RAW;
+      break;
+    case '<' + d + '#':
+      this.mode = Template.modes.COMMENT;
+      break;
+    case '<' + d + d:
+      this.mode = Template.modes.LITERAL;
+      this.source += '    ; __append("' + line.replace('<' + d + d, '<' + d) + '")' + '\n';
+      break;
+    case d + d + '>':
+      this.mode = Template.modes.LITERAL;
+      this.source += '    ; __append("' + line.replace(d + d + '>', d + '>') + '")' + '\n';
+      break;
+    case d + '>':
+    case '-' + d + '>':
+    case '_' + d + '>':
+      if (this.mode == Template.modes.LITERAL) {
+        this._addOutput(line);
+      }
+
+      this.mode = null;
+      this.truncate = line.indexOf('-') === 0 || line.indexOf('_') === 0;
+      break;
+    default:
+      // In script mode, depends on type of tag
+      if (this.mode) {
+        // If '//' is found without a line break, add a line break.
+        switch (this.mode) {
+        case Template.modes.EVAL:
+        case Template.modes.ESCAPED:
+        case Template.modes.RAW:
+          if (line.lastIndexOf('//') > line.lastIndexOf('\n')) {
+            line += '\n';
+          }
+        }
+        switch (this.mode) {
+        // Just executing code
+        case Template.modes.EVAL:
+          this.source += '    ; ' + line + '\n';
+          break;
+          // Exec, esc, and output
+        case Template.modes.ESCAPED:
+          this.source += '    ; __append(escapeFn(' + stripSemi(line) + '))' + '\n';
+          break;
+          // Exec and output
+        case Template.modes.RAW:
+          this.source += '    ; __append(' + stripSemi(line) + ')' + '\n';
+          break;
+        case Template.modes.COMMENT:
+          // Do nothing
+          break;
+          // Literal <%% mode, append as raw output
+        case Template.modes.LITERAL:
+          this._addOutput(line);
+          break;
+        }
+      }
+      // In string mode, just add the output
+      else {
+        this._addOutput(line);
+      }
+    }
+
+    if (self.opts.compileDebug && newLineCount) {
+      this.currentLine += newLineCount;
+      this.source += '    ; __line = ' + this.currentLine + '\n';
+    }
+  }
+};
+
+/**
+ * Escape characters reserved in XML.
+ *
+ * This is simply an export of {@link module:utils.escapeXML}.
+ *
+ * If `markup` is `undefined` or `null`, the empty string is returned.
+ *
+ * @param {String} markup Input string
+ * @return {String} Escaped string
+ * @public
+ * @func
+ * */
+exports.escapeXML = utils.escapeXML;
+
+/**
+ * Express.js support.
+ *
+ * This is an alias for {@link module:ejs.renderFile}, in order to support
+ * Express.js out-of-the-box.
+ *
+ * @func
+ */
+
+exports.__express = exports.renderFile;
+
+// Add require support
+/* istanbul ignore else */
+if (require.extensions) {
+  require.extensions['.ejs'] = function (module, flnm) {
+    var filename = flnm || /* istanbul ignore next */ module.filename;
+    var options = {
+      filename: filename,
+      client: true
+    };
+    var template = fileLoader(filename).toString();
+    var fn = exports.compile(template, options);
+    module._compile('module.exports = ' + fn.toString() + ';', filename);
+  };
+}
+
+/**
+ * Version of EJS.
+ *
+ * @readonly
+ * @type {String}
+ * @public
+ */
+
+exports.VERSION = _VERSION_STRING;
+
+/**
+ * Name for detection of EJS.
+ *
+ * @readonly
+ * @type {String}
+ * @public
+ */
+
+exports.name = _NAME;
+
+/* istanbul ignore if */
+if (typeof window != 'undefined') {
+  window.ejs = exports;
+}
+
+},{"../package.json":6,"./utils":2,"fs":3,"path":4}],2:[function(require,module,exports){
+/*
+ * EJS Embedded JavaScript templates
+ * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+*/
+
+/**
+ * Private utility functions
+ * @module utils
+ * @private
+ */
+
+'';
+
+var regExpChars = /[|\\{}()[\]^$+*?.]/g;
+
+/**
+ * Escape characters reserved in regular expressions.
+ *
+ * If `string` is `undefined` or `null`, the empty string is returned.
+ *
+ * @param {String} string Input string
+ * @return {String} Escaped string
+ * @static
+ * @private
+ */
+exports.escapeRegExpChars = function (string) {
+  // istanbul ignore if
+  if (!string) {
+    return '';
+  }
+  return String(string).replace(regExpChars, '\\$&');
+};
+
+var _ENCODE_HTML_RULES = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&#34;',
+  "'": '&#39;'
+};
+var _MATCH_HTML = /[&<>'"]/g;
+
+function encode_char(c) {
+  return _ENCODE_HTML_RULES[c] || c;
+}
+
+/**
+ * Stringified version of constants used by {@link module:utils.escapeXML}.
+ *
+ * It is used in the process of generating {@link ClientFunction}s.
+ *
+ * @readonly
+ * @type {String}
+ */
+
+var escapeFuncStr =
+  'var _ENCODE_HTML_RULES = {\n'
++ '      "&": "&amp;"\n'
++ '    , "<": "&lt;"\n'
++ '    , ">": "&gt;"\n'
++ '    , \'"\': "&#34;"\n'
++ '    , "\'": "&#39;"\n'
++ '    }\n'
++ '  , _MATCH_HTML = /[&<>\'"]/g;\n'
++ 'function encode_char(c) {\n'
++ '  return _ENCODE_HTML_RULES[c] || c;\n'
++ '};\n';
+
+/**
+ * Escape characters reserved in XML.
+ *
+ * If `markup` is `undefined` or `null`, the empty string is returned.
+ *
+ * @implements {EscapeCallback}
+ * @param {String} markup Input string
+ * @return {String} Escaped string
+ * @static
+ * @private
+ */
+
+exports.escapeXML = function (markup) {
+  return markup == undefined
+    ? ''
+    : String(markup)
+      .replace(_MATCH_HTML, encode_char);
+};
+exports.escapeXML.toString = function () {
+  return Function.prototype.toString.call(this) + ';\n' + escapeFuncStr;
+};
+
+/**
+ * Naive copy of properties from one object to another.
+ * Does not recurse into non-scalar properties
+ * Does not check to see if the property has a value before copying
+ *
+ * @param  {Object} to   Destination object
+ * @param  {Object} from Source object
+ * @return {Object}      Destination object
+ * @static
+ * @private
+ */
+exports.shallowCopy = function (to, from) {
+  from = from || {};
+  for (var p in from) {
+    to[p] = from[p];
+  }
+  return to;
+};
+
+/**
+ * Naive copy of a list of key names, from one object to another.
+ * Only copies property if it is actually defined
+ * Does not recurse into non-scalar properties
+ *
+ * @param  {Object} to   Destination object
+ * @param  {Object} from Source object
+ * @param  {Array} list List of properties to copy
+ * @return {Object}      Destination object
+ * @static
+ * @private
+ */
+exports.shallowCopyFromList = function (to, from, list) {
+  for (var i = 0; i < list.length; i++) {
+    var p = list[i];
+    if (typeof from[p] != 'undefined') {
+      to[p] = from[p];
+    }
+  }
+  return to;
+};
+
+/**
+ * Simple in-process cache implementation. Does not implement limits of any
+ * sort.
+ *
+ * @implements Cache
+ * @static
+ * @private
+ */
+exports.cache = {
+  _data: {},
+  set: function (key, val) {
+    this._data[key] = val;
+  },
+  get: function (key) {
+    return this._data[key];
+  },
+  reset: function () {
+    this._data = {};
+  }
+};
+
+},{}],3:[function(require,module,exports){
+
+},{}],4:[function(require,module,exports){
+(function (process){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// resolves . and .. elements in a path array with directory names there
+// must be no slashes, empty elements, or device names (c:\) in the array
+// (so also no leading and trailing slashes - it does not distinguish
+// relative and absolute paths)
+function normalizeArray(parts, allowAboveRoot) {
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = parts.length - 1; i >= 0; i--) {
+    var last = parts[i];
+    if (last === '.') {
+      parts.splice(i, 1);
+    } else if (last === '..') {
+      parts.splice(i, 1);
+      up++;
+    } else if (up) {
+      parts.splice(i, 1);
+      up--;
+    }
+  }
+
+  // if the path is allowed to go above the root, restore leading ..s
+  if (allowAboveRoot) {
+    for (; up--; up) {
+      parts.unshift('..');
+    }
+  }
+
+  return parts;
+}
+
+// Split a filename into [root, dir, basename, ext], unix version
+// 'root' is just a slash, or nothing.
+var splitPathRe =
+    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
+var splitPath = function(filename) {
+  return splitPathRe.exec(filename).slice(1);
+};
+
+// path.resolve([from ...], to)
+// posix version
+exports.resolve = function() {
+  var resolvedPath = '',
+      resolvedAbsolute = false;
+
+  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+    var path = (i >= 0) ? arguments[i] : process.cwd();
+
+    // Skip empty and invalid entries
+    if (typeof path !== 'string') {
+      throw new TypeError('Arguments to path.resolve must be strings');
+    } else if (!path) {
+      continue;
+    }
+
+    resolvedPath = path + '/' + resolvedPath;
+    resolvedAbsolute = path.charAt(0) === '/';
+  }
+
+  // At this point the path should be resolved to a full absolute path, but
+  // handle relative paths to be safe (might happen when process.cwd() fails)
+
+  // Normalize the path
+  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+    return !!p;
+  }), !resolvedAbsolute).join('/');
+
+  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+};
+
+// path.normalize(path)
+// posix version
+exports.normalize = function(path) {
+  var isAbsolute = exports.isAbsolute(path),
+      trailingSlash = substr(path, -1) === '/';
+
+  // Normalize the path
+  path = normalizeArray(filter(path.split('/'), function(p) {
+    return !!p;
+  }), !isAbsolute).join('/');
+
+  if (!path && !isAbsolute) {
+    path = '.';
+  }
+  if (path && trailingSlash) {
+    path += '/';
+  }
+
+  return (isAbsolute ? '/' : '') + path;
+};
+
+// posix version
+exports.isAbsolute = function(path) {
+  return path.charAt(0) === '/';
+};
+
+// posix version
+exports.join = function() {
+  var paths = Array.prototype.slice.call(arguments, 0);
+  return exports.normalize(filter(paths, function(p, index) {
+    if (typeof p !== 'string') {
+      throw new TypeError('Arguments to path.join must be strings');
+    }
+    return p;
+  }).join('/'));
+};
+
+
+// path.relative(from, to)
+// posix version
+exports.relative = function(from, to) {
+  from = exports.resolve(from).substr(1);
+  to = exports.resolve(to).substr(1);
+
+  function trim(arr) {
+    var start = 0;
+    for (; start < arr.length; start++) {
+      if (arr[start] !== '') break;
+    }
+
+    var end = arr.length - 1;
+    for (; end >= 0; end--) {
+      if (arr[end] !== '') break;
+    }
+
+    if (start > end) return [];
+    return arr.slice(start, end - start + 1);
+  }
+
+  var fromParts = trim(from.split('/'));
+  var toParts = trim(to.split('/'));
+
+  var length = Math.min(fromParts.length, toParts.length);
+  var samePartsLength = length;
+  for (var i = 0; i < length; i++) {
+    if (fromParts[i] !== toParts[i]) {
+      samePartsLength = i;
+      break;
+    }
+  }
+
+  var outputParts = [];
+  for (var i = samePartsLength; i < fromParts.length; i++) {
+    outputParts.push('..');
+  }
+
+  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+  return outputParts.join('/');
+};
+
+exports.sep = '/';
+exports.delimiter = ':';
+
+exports.dirname = function(path) {
+  var result = splitPath(path),
+      root = result[0],
+      dir = result[1];
+
+  if (!root && !dir) {
+    // No dirname whatsoever
+    return '.';
+  }
+
+  if (dir) {
+    // It has a dirname, strip trailing slash
+    dir = dir.substr(0, dir.length - 1);
+  }
+
+  return root + dir;
+};
+
+
+exports.basename = function(path, ext) {
+  var f = splitPath(path)[2];
+  // TODO: make this comparison case-insensitive on windows?
+  if (ext && f.substr(-1 * ext.length) === ext) {
+    f = f.substr(0, f.length - ext.length);
+  }
+  return f;
+};
+
+
+exports.extname = function(path) {
+  return splitPath(path)[3];
+};
+
+function filter (xs, f) {
+    if (xs.filter) return xs.filter(f);
+    var res = [];
+    for (var i = 0; i < xs.length; i++) {
+        if (f(xs[i], i, xs)) res.push(xs[i]);
+    }
+    return res;
+}
+
+// String.prototype.substr - negative index don't work in IE8
+var substr = 'ab'.substr(-1) === 'b'
+    ? function (str, start, len) { return str.substr(start, len) }
+    : function (str, start, len) {
+        if (start < 0) start = str.length + start;
+        return str.substr(start, len);
+    }
+;
+
+}).call(this,require('_process'))
+},{"_process":5}],5:[function(require,module,exports){
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+},{}],6:[function(require,module,exports){
+module.exports={
+  "name": "ejs",
+  "description": "Embedded JavaScript templates",
+  "keywords": [
+    "template",
+    "engine",
+    "ejs"
+  ],
+  "version": "2.5.7",
+  "author": "Matthew Eernisse <mde@fleegix.org> (http://fleegix.org)",
+  "contributors": [
+    "Timothy Gu <timothygu99@gmail.com> (https://timothygu.github.io)"
+  ],
+  "license": "Apache-2.0",
+  "main": "./lib/ejs.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mde/ejs.git"
+  },
+  "bugs": "https://github.com/mde/ejs/issues",
+  "homepage": "https://github.com/mde/ejs",
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^13.0.1",
+    "eslint": "^4.14.0",
+    "git-directory-deploy": "^1.5.1",
+    "istanbul": "~0.4.3",
+    "jake": "^8.0.0",
+    "jsdoc": "^3.4.0",
+    "lru-cache": "^4.0.1",
+    "mocha": "^3.0.2",
+    "uglify-js": "^2.6.2"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "jake test",
+    "lint": "eslint \"**/*.js\" Jakefile",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha",
+    "doc": "jake doc",
+    "devdoc": "jake doc[dev]"
+  }
+}
+
+},{}]},{},[1])(1)
+});
+
+
+/***/ }),
+
+/***/ "./src/components/index.js":
+/*!*********************************!*\
+  !*** ./src/components/index.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LinxBannerSlide = exports.LinxBannerCarousel = exports.LinxBanner = undefined;
+
+var _linxBanner = __webpack_require__(/*! ./linx-banner */ "./src/components/linx-banner/index.js");
+
+var _linxBannerCarousel = __webpack_require__(/*! ./linx-banner-carousel */ "./src/components/linx-banner-carousel/index.js");
+
+var _linxBannerSlide = __webpack_require__(/*! ./linx-banner-slide */ "./src/components/linx-banner-slide/index.js");
+
+exports.LinxBanner = _linxBanner.LinxBanner;
+exports.LinxBannerCarousel = _linxBannerCarousel.LinxBannerCarousel;
+exports.LinxBannerSlide = _linxBannerSlide.LinxBannerSlide;
+
+/***/ }),
+
+/***/ "./src/components/linx-banner-carousel/index.js":
+/*!******************************************************!*\
+  !*** ./src/components/linx-banner-carousel/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LinxBannerCarousel = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ejs = __webpack_require__(/*! ejs/ejs */ "./node_modules/ejs/ejs.js");
+
+var _ejs2 = _interopRequireDefault(_ejs);
+
+var _isInViewport = __webpack_require__(/*! @linx-impulse/commons-js/browser/isInViewport */ "./node_modules/@linx-impulse/commons-js/src/browser/isInViewport.js");
+
+var _linxBannerCarousel = __webpack_require__(/*! theme/components/linx-banner-carousel */ "./theme/components/linx-banner-carousel/index.js");
+
+var _log = __webpack_require__(/*! ../../services/log */ "./src/services/log.js");
+
+var _linxBannerSlide = __webpack_require__(/*! ../linx-banner-slide */ "./src/components/linx-banner-slide/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TRANSITIONS = {
+  fade: 'opacity',
+  horizontal: 'transform'
+};
+
+var LinxBannerCarousel = exports.LinxBannerCarousel = function (_HTMLElement) {
+  _inherits(LinxBannerCarousel, _HTMLElement);
+
+  function LinxBannerCarousel() {
+    _classCallCheck(this, LinxBannerCarousel);
+
+    var _this = _possibleConstructorReturn(this, (LinxBannerCarousel.__proto__ || Object.getPrototypeOf(LinxBannerCarousel)).call(this));
+
+    _this.linx = {};
+    return _this;
+  }
+
+  _createClass(LinxBannerCarousel, [{
+    key: 'changeActiveDotButton',
+    value: function changeActiveDotButton(index) {
+      if (this.linx.dotButtons.length) {
+        this.linx.dotButtons.forEach(function (button) {
+          button.classList.remove('linx-active');
+        });
+        this.linx.dotButtons[index].classList.add('linx-active');
+      }
+    }
+  }, {
+    key: 'changeNextSlide',
+    value: function changeNextSlide(index) {
+      var nextSlide = this.linx.slides[this.linx.next];
+      nextSlide.classList.remove('linx-next');
+
+      this.linx.next = index;
+      nextSlide = this.linx.slides[index];
+      nextSlide.classList.add('linx-next');
+      nextSlide.classList.remove('linx-prev');
+
+      return new Promise(function (resolve) {
+        setTimeout(resolve);
+      });
+    }
+  }, {
+    key: 'changePrevSlide',
+    value: function changePrevSlide(index) {
+      var prevSlide = this.linx.slides[this.linx.prev];
+      prevSlide.classList.remove('linx-prev');
+
+      this.linx.prev = index;
+      prevSlide = this.linx.slides[index];
+      prevSlide.classList.add('linx-prev');
+      prevSlide.classList.remove('linx-next');
+
+      return new Promise(function (resolve) {
+        setTimeout(resolve);
+      });
+    }
+  }, {
+    key: 'connectedCallback',
+    value: function connectedCallback() {
+      this.init();
+    }
+  }, {
+    key: 'createSlides',
+    value: function createSlides() {
+      var slidesContainer = this.querySelector('.linx-slides');
+      var dotsContainer = this.querySelector('.linx-dots-navigator');
+
+      this.linx.dotButtons = [];
+      this.linx.slides = [];
+      this.linx.current = 0;
+      this.linx.prev = 0;
+      this.linx.next = 0;
+
+      slidesContainer.classList.add('linx-' + this.layout.imageFit);
+      if (this.layout.imageFit === 'responsive') {
+        var firstSlide = this.slides[0];
+        var imageUrl = firstSlide.content.imageUrl;
+
+        if (imageUrl) {
+          var fillContentElement = document.createElement('img');
+          fillContentElement.src = imageUrl;
+          fillContentElement.style.height = 'auto';
+          fillContentElement.style.width = '100%';
+          fillContentElement.style.opacity = '0';
+          slidesContainer.appendChild(fillContentElement);
+        }
+      } else {
+        slidesContainer.style.height = this.layout.height + 'px';
+      }
+
+      for (var i = 0; i < this.slides.length; ++i) {
+        var slideData = this.slides[i];
+        var slideComponent = new _linxBannerSlide.LinxBannerSlide();
+        slideComponent.slideData = slideData;
+        slideComponent.classList.add('linx-' + this.layout.imageFit);
+        slidesContainer.appendChild(slideComponent);
+        this.linx.slides.push(slideComponent);
+        if (this.layout.navigation) {
+          var dotButton = document.createElement('button');
+          dotButton.setAttribute('data-slide', i);
+          dotsContainer.appendChild(dotButton);
+          this.linx.dotButtons.push(dotButton);
+        }
+      }
+      this.changeActiveDotButton(0);
+
+      if (this.slides.length > 1) {
+        this.linx.prev = this.slides.length - 1;
+        this.linx.next = 1;
+      }
+
+      this.linx.slides[this.linx.current].classList.add('linx-current');
+      this.linx.slides[this.linx.next].classList.add('linx-next');
+      this.linx.slides[this.linx.prev].classList.add('linx-prev');
+
+      this.linx.slides[this.linx.current].visible = true;
+    }
+  }, {
+    key: 'disconnectedCallback',
+    value: function disconnectedCallback() {
+      this.stopSlider();
+    }
+  }, {
+    key: 'getNextIndex',
+    value: function getNextIndex(index) {
+      return index < this.slides.length - 1 ? index + 1 : 0;
+    }
+  }, {
+    key: 'getPrevIndex',
+    value: function getPrevIndex(index) {
+      return index > 0 ? index - 1 : this.slides.length - 1;
+    }
+  }, {
+    key: 'goToSlide',
+    value: function goToSlide(index) {
+      var _this2 = this;
+
+      var diff = index - this.linx.current;
+
+      if (diff === 1) {
+        return this.nextSlide();
+      } else if (diff === -1) {
+        return this.prevSlide();
+      } else if (diff < 0) {
+        return this.changePrevSlide(index).then(function () {
+          return _this2.prevSlide();
+        }).then(function () {
+          _this2.changeNextSlide(_this2.getNextIndex(index));
+        });
+      }
+
+      return this.changeNextSlide(index).then(function () {
+        return _this2.nextSlide();
+      }).then(function () {
+        _this2.changePrevSlide(_this2.getPrevIndex(index));
+      });
+    }
+  }, {
+    key: 'init',
+    value: function init() {
+      this.linx.initialized = true;
+      this.innerHTML = '';
+
+      if (Array.isArray(this.slides) && this.slides.length > 0 && this.layout) {
+        this.prepareRenderData();
+        this.render();
+        this.registerEvents();
+      }
+    }
+  }, {
+    key: 'nextSlide',
+    value: function nextSlide() {
+      var _this3 = this;
+
+      var transitionType = this.layout.transition.type;
+      var transitionDuration = this.layout.transition.transitionDuration;
+
+
+      var currentSlide = this.linx.slides[this.linx.current];
+      var prevSlide = this.linx.slides[this.linx.prev];
+      var nextSlide = this.linx.slides[this.linx.next];
+
+      var curr = currentSlide;
+      var next = nextSlide;
+
+      var tProp = TRANSITIONS[transitionType];
+      currentSlide.style.cssText = 'transition: ' + tProp + ' ' + transitionDuration + 'ms';
+      nextSlide.style.cssText = 'transition: ' + tProp + ' ' + transitionDuration + 'ms';
+
+      currentSlide.classList.remove('linx-current');
+      nextSlide.classList.remove('linx-next');
+      prevSlide.classList.remove('linx-prev');
+
+      this.linx.prev = this.linx.current;
+      this.linx.current = this.linx.next;
+
+      this.changeActiveDotButton(this.linx.current);
+      currentSlide = this.linx.slides[this.linx.current];
+      prevSlide = this.linx.slides[this.linx.prev];
+
+      currentSlide.visible = true;
+      currentSlide.classList.add('linx-current');
+      prevSlide.classList.add('linx-prev');
+
+      this.linx.transitioning = true;
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          curr.style.cssText = '';
+          next.style.cssText = '';
+          curr.visible = false;
+
+          _this3.linx.next = _this3.getNextIndex(_this3.linx.current);
+          nextSlide = _this3.linx.slides[_this3.linx.next];
+          nextSlide.classList.add('linx-next');
+
+          _this3.linx.transitioning = false;
+          resolve();
+        }, transitionDuration);
+      });
+    }
+  }, {
+    key: 'stopSlider',
+    value: function stopSlider() {
+      if (this.linx.slideClock) {
+        clearInterval(this.linx.slideClock);
+      }
+    }
+  }, {
+    key: 'playSlider',
+    value: function playSlider() {
+      var _this4 = this;
+
+      var slideDuration = this.layout.transition.slideDuration;
+
+
+      clearInterval(this.linx.slideClock);
+
+      this.linx.slideClock = setInterval(function () {
+        if (!document.hidden && (0, _isInViewport.isInViewport)(_this4)) {
+          _this4.nextSlide();
+        }
+      }, slideDuration * 1000);
+    }
+  }, {
+    key: 'prepareRenderData',
+    value: function prepareRenderData() {
+      var renderData = {
+        templateStyle: '<style>' + _linxBannerCarousel.templateStyle + '</style>',
+        arrows: this.layout.arrows,
+        navigation: this.layout.navigation
+      };
+
+      var cbs = _linxBannerCarousel.config.callbacks || {};
+      if (typeof cbs.prepareRenderData === 'function') {
+        cbs.prepareRenderData.call(this, renderData);
+      }
+
+      this.linx.renderData = renderData;
+    }
+  }, {
+    key: 'prevSlide',
+    value: function prevSlide() {
+      var _this5 = this;
+
+      var transitionType = this.layout.transition.type;
+      var transitionDuration = this.layout.transition.transitionDuration;
+
+
+      var currentSlide = this.linx.slides[this.linx.current];
+      var prevSlide = this.linx.slides[this.linx.prev];
+      var nextSlide = this.linx.slides[this.linx.next];
+
+      var tProp = TRANSITIONS[transitionType];
+      currentSlide.style.cssText = 'transition: ' + tProp + ' ' + transitionDuration + 'ms';
+      prevSlide.style.cssText = 'transition: ' + tProp + ' ' + transitionDuration + 'ms';
+
+      var curr = currentSlide;
+      var prev = prevSlide;
+
+      currentSlide.classList.remove('linx-current');
+      nextSlide.classList.remove('linx-next');
+      prevSlide.classList.remove('linx-prev');
+
+      this.linx.next = this.linx.current;
+      this.linx.current = this.linx.prev;
+
+      this.changeActiveDotButton(this.linx.current);
+      currentSlide = this.linx.slides[this.linx.current];
+      nextSlide = this.linx.slides[this.linx.next];
+
+      currentSlide.visible = true;
+      currentSlide.classList.add('linx-current');
+      nextSlide.classList.add('linx-next');
+
+      this.linx.transitioning = true;
+
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          curr.style.cssText = '';
+          prev.style.cssText = '';
+          curr.visible = false;
+
+          _this5.linx.prev = _this5.getPrevIndex(_this5.linx.current);
+          prevSlide = _this5.linx.slides[_this5.linx.prev];
+          prevSlide.classList.add('linx-prev');
+
+          _this5.linx.transitioning = false;
+          resolve();
+        }, transitionDuration);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var elementTemplate = document.createElement('template');
+
+      var rendered = _ejs2.default.render(_linxBannerCarousel.template, this.linx.renderData);
+      elementTemplate.innerHTML += rendered;
+
+      this.appendChild(document.importNode(elementTemplate.content, true));
+
+      this.classList.add('linx-' + this.layout.transition.type);
+
+      this.createSlides();
+      this.linx.nextButton = this.querySelector('.linx-next-button');
+      this.linx.prevButton = this.querySelector('.linx-prev-button');
+
+      this.playSlider();
+
+      var cbs = _linxBannerCarousel.config.callbacks || {};
+      if (typeof cbs.render === 'function') {
+        cbs.render.call(this);
+      }
+    }
+  }, {
+    key: 'registerEvents',
+    value: function registerEvents() {
+      var _this6 = this;
+
+      this.linx.dotButtons.forEach(function (dotButton) {
+        dotButton.addEventListener('click', function (e) {
+          var index = parseInt(dotButton.getAttribute('data-slide'), 10);
+          e.preventDefault();
+
+          if (!_this6.linx.transitioning && index !== _this6.linx.current) {
+            _this6.stopSlider();
+            _this6.goToSlide(index);
+            _this6.playSlider();
+          }
+        });
+      });
+
+      this.linx.slides.forEach(function (slide) {
+        var MOVE_RANGE = 50;
+        var touchStart = void 0;
+
+        slide.addEventListener('mouseover', function () {
+          _this6.stopSlider();
+        });
+
+        slide.addEventListener('mouseout', function () {
+          _this6.playSlider();
+        });
+
+        var onTouchStart = function onTouchStart(e) {
+          touchStart = e;
+
+          if (touchStart.type === 'touchstart') {
+            _this6.stopSlider();
+          }
+        };
+
+        var onTouchEnd = function onTouchEnd(e) {
+          if (_this6.linx.transitioning) {
+            return;
+          }
+
+          var typeEvent = touchStart.type;
+          var touchEnd = e;
+
+          var pxs = typeEvent === 'touchstart' ? touchStart.changedTouches[0].pageX : touchStart.pageX;
+
+          var pxe = typeEvent === 'touchstart' ? touchEnd.changedTouches[0].pageX : touchEnd.pageX;
+
+          if (Math.abs(pxs - pxe) >= MOVE_RANGE) {
+            if (pxs > pxe) {
+              _this6.nextSlide();
+            } else {
+              _this6.prevSlide();
+            }
+          } else {
+            var currentSlide = _this6.linx.slides[_this6.linx.current];
+            var prevSlide = _this6.linx.slides[_this6.linx.prev];
+            var nextSlide = _this6.linx.slides[_this6.linx.next];
+            currentSlide.style.transform = 'translateX(0px)';
+            prevSlide.style.transform = 'translateX(-100%)';
+            nextSlide.style.transform = 'translateX(100%)';
+          }
+
+          if (typeEvent === 'touchstart') {
+            _this6.playSlider();
+          }
+
+          touchStart = null;
+        };
+
+        var onTouchMove = function onTouchMove(e) {
+          var typeEvent = touchStart.type;
+          var pxs = typeEvent === 'touchstart' ? touchStart.changedTouches[0].pageX : touchStart.pageX;
+
+          var pxe = typeEvent === 'touchstart' ? e.changedTouches[0].pageX : e.pageX;
+
+          var diff = Math.abs(pxe - pxs);
+          var currentSlide = _this6.linx.slides[_this6.linx.current];
+          var prevSlide = _this6.linx.slides[_this6.linx.prev];
+          var nextSlide = _this6.linx.slides[_this6.linx.next];
+
+          if (pxs === pxe) {
+            return;
+          }
+
+          if (diff >= MOVE_RANGE || _this6.linx.transitioning) {
+            e.preventDefault();
+            if (_this6.linx.transitioning) {
+              return;
+            }
+          }
+
+          // previous slide
+          if (pxs < pxe) {
+            currentSlide.style.transform = 'translateX(' + diff + 'px)';
+            prevSlide.style.transform = 'translateX(calc(-100% + ' + diff + 'px))';
+            // next slide
+          } else {
+            currentSlide.style.transform = 'translateX(-' + diff + 'px)';
+            nextSlide.style.transform = 'translateX(calc(100% - ' + diff + 'px))';
+          }
+        };
+
+        slide.addEventListener('touchstart', onTouchStart, false);
+        slide.addEventListener('touchend', onTouchEnd, false);
+
+        slide.addEventListener('touchmove', onTouchMove, false);
+      });
+
+      if (this.linx.nextButton) {
+        this.linx.nextButton.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (!_this6.linx.transitioning) {
+            _this6.stopSlider();
+            _this6.nextSlide();
+            _this6.playSlider();
+          }
+        });
+      }
+
+      if (this.linx.prevButton) {
+        this.linx.prevButton.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (!_this6.linx.transitioning) {
+            _this6.stopSlider();
+            _this6.prevSlide();
+            _this6.playSlider();
+          }
+        });
+      }
+
+      var cbs = _linxBannerCarousel.config.callbacks || {};
+      if (typeof cbs.registerEvents === 'function') {
+        cbs.registerEvents.call(this);
+      }
+    }
+  }]);
+
+  return LinxBannerCarousel;
+}(HTMLElement);
+
+var defineComponent = function defineComponent() {
+  try {
+    window.customElements.define('linx-banner-carousel', LinxBannerCarousel);
+  } catch (err) {
+    _log.logService.error('Error defining linx-banner-carousel component: ' + err);
+  }
+};
+
+if (window.WebComponents.ready || window.customElements && window.customElements.define) {
+  defineComponent();
+} else {
+  window.addEventListener('WebComponentsReady', defineComponent);
+}
+
+/***/ }),
+
+/***/ "./src/components/linx-banner-slide/index.js":
+/*!***************************************************!*\
+  !*** ./src/components/linx-banner-slide/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LinxBannerSlide = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ajax = __webpack_require__(/*! @linx-impulse/commons-js/http/ajax */ "./node_modules/@linx-impulse/commons-js/src/http/ajax.js");
+
+var _ejs = __webpack_require__(/*! ejs/ejs */ "./node_modules/ejs/ejs.js");
+
+var _ejs2 = _interopRequireDefault(_ejs);
+
+var _linxBannerSlide = __webpack_require__(/*! theme/components/linx-banner-slide */ "./theme/components/linx-banner-slide/index.js");
+
+var _localStorage = __webpack_require__(/*! ../../util/local-storage */ "./src/util/local-storage.js");
+
+var _config = __webpack_require__(/*! ../../config */ "./src/config.js");
+
+var _googleAnalytics = __webpack_require__(/*! ../../services/google-analytics */ "./src/services/google-analytics.js");
+
+var _log = __webpack_require__(/*! ../../services/log */ "./src/services/log.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LinxBannerSlide = exports.LinxBannerSlide = function (_HTMLElement) {
+  _inherits(LinxBannerSlide, _HTMLElement);
+
+  function LinxBannerSlide() {
+    _classCallCheck(this, LinxBannerSlide);
+
+    var _this = _possibleConstructorReturn(this, (LinxBannerSlide.__proto__ || Object.getPrototypeOf(LinxBannerSlide)).call(this));
+
+    _this.linx = {};
+    return _this;
+  }
+
+  _createClass(LinxBannerSlide, [{
+    key: 'connectedCallback',
+    value: function connectedCallback() {
+      this.init();
+    }
+  }, {
+    key: 'attributeChangedCallback',
+    value: function attributeChangedCallback(name) {
+      if (name === 'visible') {
+        this.trackView();
+      }
+    }
+  }, {
+    key: 'init',
+    value: function init() {
+      this.linx.initialized = true;
+      this.innerHTML = '';
+
+      if (this.slideData) {
+        this.prepareRenderData();
+        this.render();
+        this.registerEvents();
+      }
+    }
+  }, {
+    key: 'prepareRenderData',
+    value: function prepareRenderData() {
+      var renderData = {
+        templateStyle: '<style>' + _linxBannerSlide.templateStyle + '</style>',
+        type: this.slideData.content.type,
+        html: this.slideData.content.html,
+        css: this.slideData.content.css ? '<style>' + this.slideData.content.css + '</style>' : '',
+        imageUrl: this.slideData.content.imageUrl,
+        name: this.slideData.name,
+        url: this.slideData.url
+      };
+
+      var cbs = _linxBannerSlide.config.callbacks || {};
+      if (typeof cbs.prepareRenderData === 'function') {
+        cbs.prepareRenderData.call(this, renderData);
+      }
+
+      this.linx.renderData = renderData;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var elementTemplate = document.createElement('template');
+
+      var rendered = _ejs2.default.render(_linxBannerSlide.template, this.linx.renderData);
+      elementTemplate.innerHTML += rendered;
+
+      this.appendChild(document.importNode(elementTemplate.content, true));
+
+      // execute all javascript in html
+      this.querySelectorAll('script').forEach(function (node) {
+        return !node.src && window.eval.call( // eslint-disable-line no-eval
+        window, node.text || node.textContent || node.innerText || node.innerHTML || '');
+      });
+
+      var cbs = _linxBannerSlide.config.callbacks || {};
+      if (typeof cbs.render === 'function') {
+        cbs.render.call(this);
+      }
+    }
+  }, {
+    key: 'registerEvents',
+    value: function registerEvents() {
+      var _this2 = this;
+
+      this.addEventListener('click', function () {
+        _localStorage.localStorageUtil.set(_config.config.localStorageName.click, JSON.stringify(_this2.slideData));
+      });
+
+      var cbs = _linxBannerSlide.config.callbacks || {};
+      if (typeof cbs.registerEvents === 'function') {
+        cbs.registerEvents.call(this);
+      }
+    }
+  }, {
+    key: 'trackView',
+    value: function trackView() {
+      if (this.visible && this.slideData && !this.linx.trackedView) {
+        (0, _ajax.ajax)({ url: this.slideData.viewUrl });
+        _googleAnalytics.googleAnalyticsService.trackView(this.slideData);
+        this.linx.trackedView = true;
+      }
+    }
+  }, {
+    key: 'visible',
+    get: function get() {
+      return this.hasAttribute('visible');
+    },
+    set: function set(value) {
+      if (value) {
+        this.setAttribute('visible', '');
+      } else {
+        this.removeAttribute('visible');
+      }
+    }
+  }], [{
+    key: 'observedAttributes',
+    get: function get() {
+      return ['visible'];
+    }
+  }]);
+
+  return LinxBannerSlide;
+}(HTMLElement);
+
+var defineComponent = function defineComponent() {
+  try {
+    window.customElements.define('linx-banner-slide', LinxBannerSlide);
+  } catch (err) {
+    _log.logService.error('Error defining linx-banner-slide component: ' + err);
+  }
+};
+
+if (window.WebComponents.ready || window.customElements && window.customElements.define) {
+  defineComponent();
+} else {
+  window.addEventListener('WebComponentsReady', defineComponent);
+}
+
+/***/ }),
+
+/***/ "./src/components/linx-banner/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/linx-banner/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LinxBanner = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _ejs = __webpack_require__(/*! ejs/ejs */ "./node_modules/ejs/ejs.js");
+
+var _ejs2 = _interopRequireDefault(_ejs);
+
+var _linxBanner = __webpack_require__(/*! theme/components/linx-banner */ "./theme/components/linx-banner/index.js");
+
+var _log = __webpack_require__(/*! ../../services/log */ "./src/services/log.js");
+
+var _linxBannerCarousel = __webpack_require__(/*! ../linx-banner-carousel */ "./src/components/linx-banner-carousel/index.js");
+
+var _linxBannerSlide = __webpack_require__(/*! ../linx-banner-slide */ "./src/components/linx-banner-slide/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function injectCarousel(layout, slides, slidesContainer) {
+  var carousel = new _linxBannerCarousel.LinxBannerCarousel();
+  carousel.layout = layout;
+  carousel.slides = slides;
+  slidesContainer.appendChild(carousel);
+}
+
+function injectSingleSlide(layout, slides, slidesContainer) {
+  var slide = new _linxBannerSlide.LinxBannerSlide();
+
+  var _slides = _slicedToArray(slides, 1),
+      slideData = _slides[0];
+
+  slide.slideData = slideData;
+  slide.visible = true;
+  slide.classList.add('linx-' + layout.imageFit);
+  slidesContainer.appendChild(slide);
+
+  if (layout.imageFit !== 'responsive') {
+    slidesContainer.style.height = layout.height + 'px';
+  }
+}
+
+var LinxBanner = exports.LinxBanner = function (_HTMLElement) {
+  _inherits(LinxBanner, _HTMLElement);
+
+  function LinxBanner() {
+    _classCallCheck(this, LinxBanner);
+
+    var _this = _possibleConstructorReturn(this, (LinxBanner.__proto__ || Object.getPrototypeOf(LinxBanner)).call(this));
+
+    _this.linx = {};
+    return _this;
+  }
+
+  _createClass(LinxBanner, [{
+    key: 'connectedCallback',
+    value: function connectedCallback() {
+      if (this.bannerData && this.bannerData.layout.scoped) {
+        this.attachShadow({ mode: 'open' });
+      }
+
+      this.init();
+    }
+  }, {
+    key: 'init',
+    value: function init() {
+      this.linx.initialized = true;
+      this.linx.root = this.shadowRoot || this;
+
+      this.linx.root.innerHTML = '';
+
+      if (this.bannerData) {
+        this.prepareRenderData();
+        this.render();
+        this.registerEvents();
+      }
+    }
+  }, {
+    key: 'prepareRenderData',
+    value: function prepareRenderData() {
+      var renderData = {
+        templateStyle: '<style>' + _linxBanner.templateStyle + '</style>'
+      };
+
+      var cbs = _linxBanner.config.callbacks || {};
+      if (typeof cbs.prepareRenderData === 'function') {
+        cbs.prepareRenderData.call(this, renderData);
+      }
+
+      this.linx.renderData = renderData;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var elementTemplate = document.createElement('template');
+
+      var rendered = _ejs2.default.render(_linxBanner.template, this.linx.renderData);
+      elementTemplate.innerHTML += rendered;
+
+      this.linx.root.appendChild(document.importNode(elementTemplate.content, true));
+
+      var _bannerData = this.bannerData,
+          slides = _bannerData.slides,
+          layout = _bannerData.layout;
+
+      slides.forEach(function (slide) {
+        slide.gaLabel = _this2.bannerData.name + '_' + slide.name;
+      });
+      var slidesContainer = this.linx.root.querySelector('.linx-slides');
+
+      slidesContainer.classList.add('linx-' + layout.imageFit);
+
+      if (slides.length > 1) {
+        injectCarousel(layout, slides, slidesContainer);
+      } else {
+        injectSingleSlide(layout, slides, slidesContainer);
+      }
+
+      var cbs = _linxBanner.config.callbacks || {};
+      if (typeof cbs.render === 'function') {
+        cbs.render.call(this);
+      }
+    }
+  }, {
+    key: 'registerEvents',
+    value: function registerEvents() {
+      var cbs = _linxBanner.config.callbacks || {};
+      if (typeof cbs.registerEvents === 'function') {
+        cbs.registerEvents.call(this);
+      }
+    }
+  }]);
+
+  return LinxBanner;
+}(HTMLElement);
+
+var defineComponent = function defineComponent() {
+  try {
+    window.customElements.define('linx-banner', LinxBanner);
+  } catch (err) {
+    _log.logService.error('Error defining linx-banner component: ' + err);
+  }
+};
+
+if (window.WebComponents.ready || window.customElements && window.customElements.define) {
+  defineComponent();
+} else {
+  window.addEventListener('WebComponentsReady', defineComponent);
+}
+
+/***/ }),
+
+/***/ "./src/config.js":
+/*!***********************!*\
+  !*** ./src/config.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var config = exports.config = {
+  cookieName: {
+    deviceId: 'chaordic_browserId',
+    bannerHomologation: 'linx_bannerHomologation',
+    abTest: 'chaordic_testGroup'
+  },
+  localStorageName: {
+    click: 'linx_banner_click'
+  },
+  server: {
+    baseUrl: 'https://api.linximpulse.com/engage/b/v1'
+  },
+  fallback: {
+    pages: ['home', 'landing_page'],
+    url: '//onsite-recs-fallback.chaordicsystems.com',
+    timeout: 7000
+  }
+};
+
+/***/ }),
+
+/***/ "./src/linx-meta.js":
+/*!**************************!*\
+  !*** ./src/linx-meta.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.linxMeta = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _browser = __webpack_require__(/*! @linx-impulse/commons-js/browser */ "./node_modules/@linx-impulse/commons-js/src/browser/index.js");
+
+function getMeta() {
+  var win = window.top;
+  var meta = void 0;
+
+  if (win.linxImpulse && win.linxImpulse.legacyMeta) {
+    meta = win.linxImpulse.legacyMeta;
+  } else {
+    meta = win.$chaordic_meta || win.chaordic_meta;
+  }
+
+  return meta || {};
+}
+
+function getConfig() {
+  var win = window.top;
+  var chaordic = win.chaordic || {};
+
+  return chaordic.Config || {};
+}
+
+var linxMeta = exports.linxMeta = {
+  get source() {
+    var meta = getMeta();
+
+    if (meta.source) {
+      return meta.source;
+    } else if ((0, _browser.isMobile)()) {
+      return 'mobile';
+    }
+
+    return 'desktop';
+  },
+
+  get userId() {
+    var meta = getMeta();
+
+    return meta.user && meta.user.id;
+  },
+
+  get pageName() {
+    var meta = getMeta();
+
+    return typeof meta.page === 'string' ? meta.page : meta.page && meta.page.name;
+  },
+
+  get searchQuery() {
+    var meta = getMeta();
+
+    var query = void 0;
+
+    if (this.pageName === 'search' || this.pageName === 'emptysearch') {
+      if (meta.search) {
+        var _meta$search$query = meta.search.query;
+        query = _meta$search$query === undefined ? '' : _meta$search$query;
+      }
+    }
+
+    return query;
+  },
+
+  get apikey() {
+    var cfg = getConfig();
+
+    return cfg.API_KEY || '';
+  },
+
+  get product() {
+    var meta = getMeta();
+    return typeof meta.pid === 'string' ? meta.pid : meta.product || {};
+  },
+
+  get categories() {
+    var meta = getMeta();
+    var categories = meta.categories;
+
+
+    if (meta.page && _typeof(meta.page) === 'object') {
+      if (meta.page.categories) {
+        categories = meta.page.categories;
+      }
+    }
+
+    if (Array.isArray(categories)) {
+      return categories.map(function (category) {
+        if (typeof category === 'string') {
+          return {
+            id: category,
+            name: category
+          };
+        }
+
+        return category;
+      });
+    }
+
+    return categories;
+  },
+
+  get tags() {
+    var meta = getMeta();
+    var tags = meta.tags;
+
+
+    if (meta.page && _typeof(meta.page) === 'object') {
+      if (meta.page.tags) {
+        tags = meta.page.tags;
+      }
+    }
+
+    return tags;
+  },
+
+  get url() {
+    return window.location.href;
+  }
+
+};
+
+/***/ }),
+
+/***/ "./src/main.js":
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+var _ajax = __webpack_require__(/*! @linx-impulse/commons-js/http/ajax */ "./node_modules/@linx-impulse/commons-js/src/http/ajax.js");
+
+var _localStorage = __webpack_require__(/*! ./util/local-storage */ "./src/util/local-storage.js");
+
+var _banner = __webpack_require__(/*! ./managers/banner */ "./src/managers/banner.js");
+
+var _config = __webpack_require__(/*! ./config */ "./src/config.js");
+
+var _googleAnalytics = __webpack_require__(/*! ./services/google-analytics */ "./src/services/google-analytics.js");
+
+var _linxBanner = __webpack_require__(/*! ./components/linx-banner */ "./src/components/linx-banner/index.js");
+
+var MAX_RETRY_SEND_CLICK = 3;
+var MAX_RETRY_INJECT_BANNER = 3;
+var RETRY_WAIT_TIME_INJECT_BANNER = 100;
+
+function createSlotDynamic(banner) {
+  var slotDOMReference = document.querySelector(banner.selector);
+  if (slotDOMReference) {
+    var slotDOM = document.createElement('DIV');
+    slotDOM.setAttribute('linx-banner', banner.div);
+
+    var parent = slotDOMReference.parentNode;
+
+    switch (banner.selectorReference) {
+      case 'beforeElement':
+        parent.insertBefore(slotDOM, slotDOMReference);
+        break;
+      case 'intoElement':
+        slotDOMReference.appendChild(slotDOM);
+        break;
+      case 'afterElement':
+      default:
+        parent.insertBefore(slotDOM, slotDOMReference.nextSibling);
+        break;
+    }
+
+    return slotDOM;
+  }
+
+  return null;
+}
+
+function injectBanner(banner) {
+  var retries = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : MAX_RETRY_INJECT_BANNER;
+
+  var selector = '[linx-banner="' + banner.div + '"]';
+  var div = document.querySelector(selector) || createSlotDynamic(banner);
+
+  if (div) {
+    div.innerHTML = '';
+    var component = new _linxBanner.LinxBanner();
+    component.bannerData = banner;
+    div.appendChild(component);
+  } else if (retries > 0) {
+    setTimeout(function () {
+      injectBanner(banner, retries - 1);
+    }, RETRY_WAIT_TIME_INJECT_BANNER);
+  }
+}
+
+function injectPageBanners() {
+  _banner.bannerManager.getAll().then(function (banners) {
+    banners.forEach(function (banner) {
+      return injectBanner(banner);
+    });
+  });
+}
+
+function callTimedClick(slide, times) {
+  if (!_googleAnalytics.googleAnalyticsService.trackClick(slide) && times < MAX_RETRY_SEND_CLICK) {
+    setTimeout(function () {
+      return callTimedClick(slide, times + 1);
+    }, 500);
+  } else {
+    _localStorage.localStorageUtil.remove(_config.config.localStorageName.click);
+  }
+}
+
+function sendClickEvents() {
+  var clickedSlide = _localStorage.localStorageUtil.get(_config.config.localStorageName.click);
+
+  if (clickedSlide) {
+    var slide = JSON.parse(clickedSlide);
+    (0, _ajax.ajax)({ url: slide.clickUrl });
+
+    // If GA is loaded after banner.js, wait for it to be loaded
+    callTimedClick(slide, 0);
+  }
+}
+
+var bannerApp = {
+  init: function init() {
+    _banner.bannerManager.load();
+    sendClickEvents();
+
+    if (window.WebComponents.ready || window.customElements && window.customElements.define) {
+      injectPageBanners();
+    } else {
+      window.addEventListener('WebComponentsReady', injectPageBanners);
+    }
+  }
+};
+
+bannerApp.init();
+
+var win = window.top;
+win.linx = win.linx || {};
+win.linx.banner = win.linx.banner || {};
+win.linx.banner.app = bannerApp;
+
+/***/ }),
+
+/***/ "./src/managers/banner.js":
+/*!********************************!*\
+  !*** ./src/managers/banner.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.bannerManager = undefined;
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _bannerClientJs = __webpack_require__(/*! @linx-impulse/banner-client-js */ "./node_modules/@linx-impulse/banner-client-js/src/index.js");
+
+var _ajax = __webpack_require__(/*! @linx-impulse/commons-js/http/ajax */ "./node_modules/@linx-impulse/commons-js/src/http/ajax.js");
+
+var _parse = __webpack_require__(/*! @linx-impulse/commons-js/query-string/parse */ "./node_modules/@linx-impulse/commons-js/src/query-string/parse.js");
+
+var _linxMeta = __webpack_require__(/*! ../linx-meta */ "./src/linx-meta.js");
+
+var _config = __webpack_require__(/*! ../config */ "./src/config.js");
+
+var _homologation = __webpack_require__(/*! ../services/homologation */ "./src/services/homologation.js");
+
+var _abTest = __webpack_require__(/*! ../services/ab-test */ "./src/services/ab-test.js");
+
+var getBannersPromise = Promise.resolve([]);
+
+function normalizeUrl(url) {
+  return url.replace(/[^a-zA-Z0-9]/g, '_');
+}
+
+function getPath() {
+  return '' + window.location.host + window.location.pathname || '';
+}
+
+var bannerManager = exports.bannerManager = {
+  getAll: function getAll() {
+    return getBannersPromise;
+  },
+  load: function load() {
+    var _this = this;
+
+    getBannersPromise = new Promise(function (resolve) {
+      var countRetry = 3;
+      var retry = function retry() {
+        _bannerClientJs.BannerClient.getRecommendations({
+          page: _linxMeta.linxMeta.pageName,
+          source: _linxMeta.linxMeta.source,
+          userId: _linxMeta.linxMeta.userId,
+          showLayout: true,
+          timeout: _config.config.fallback.timeout,
+          categories: _linxMeta.linxMeta.categories || [],
+          product: _linxMeta.linxMeta.product,
+          tags: _linxMeta.linxMeta.tags,
+          url: _linxMeta.linxMeta.url,
+          homologation: _homologation.homologationService.isHomologation(),
+          testGroup: _abTest.abTestService.getGroup(),
+          searchQuery: _linxMeta.linxMeta.searchQuery
+        }).then(resolve).catch(function () {
+          countRetry -= 1;
+          if (countRetry) {
+            // retry when chaordic_meta or some validation is not ok
+            setTimeout(function () {
+              return retry();
+            }, 100);
+          } else {
+            _this.fallback().then(resolve);
+          }
+        });
+      };
+
+      retry();
+    });
+
+    return getBannersPromise;
+  },
+  fallback: function fallback() {
+    var _this2 = this;
+
+    return new Promise(function (resolve) {
+      var cfg = _config.config.fallback;
+      var page = _linxMeta.linxMeta.pageName;
+      var source = _linxMeta.linxMeta.source,
+          apikey = _linxMeta.linxMeta.apikey;
+
+
+      if (cfg.pages.indexOf(page) !== -1) {
+        var url = cfg.url + '/banner/' + apikey + '/' + source + '/' + page;
+        if (page === 'landing_page') {
+          _this2.fallbackLandingPage(url).then(resolve);
+        } else {
+          url += '/recommendations.json';
+          _this2.ajaxFallback(url).then(resolve);
+        }
+      } else {
+        resolve([]);
+      }
+    });
+  },
+  fallbackLandingPage: function fallbackLandingPage(baseUrl) {
+    var _this3 = this;
+
+    var path = getPath();
+    var urlQueries = baseUrl + '/' + normalizeUrl(path) + '/recommendations.json';
+    var urlAll = baseUrl + '/recommendations.json';
+    return Promise.all([this.ajaxFallback(urlQueries), this.ajaxFallback(urlAll)]).then(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          queries = _ref2[0],
+          all = _ref2[1];
+
+      if (queries && Object.keys(queries).length) {
+        return _this3.findLandingPageRecommendations(queries);
+      } else if (all && Object.keys(all).length) {
+        return all['?'] || [];
+      }
+
+      return [];
+    }).catch(function () {
+      return [];
+    });
+  },
+  ajaxFallback: function ajaxFallback(url) {
+    return new Promise(function (resolve) {
+      (0, _ajax.ajax)({
+        url: url,
+        success: resolve,
+        error: function error() {
+          return resolve([]);
+        }
+      });
+    });
+  },
+  findLandingPageRecommendations: function findLandingPageRecommendations(banners) {
+    if (!Object.keys(banners).length) {
+      return [];
+    }
+
+    var params = (0, _parse.parse)(window.location.search.split('?')[1]);
+    var indexParams = Object.keys(banners).filter(function (key) {
+      var keyParse = (0, _parse.parse)(key);
+      var findKeys = Object.keys(keyParse).filter(function (query) {
+        return params[query] === keyParse[query];
+      });
+      return findKeys.length === Object.keys(keyParse).length;
+    });
+
+    if (!Array.isArray(indexParams) || !indexParams.length || !Object.keys(params).length) {
+      return banners['?'] ? banners['?'] : [];
+    }
+
+    var minIndex = indexParams[0];
+    indexParams.forEach(function (i) {
+      if (i.split('&').length > minIndex.split('&').length && Array.isArray(banners[i]) && banners[i].length) {
+        minIndex = i;
+      }
+    });
+
+    return banners[minIndex] || [];
+  }
+};
+
+/***/ }),
+
+/***/ "./src/services/ab-test.js":
+/*!*********************************!*\
+  !*** ./src/services/ab-test.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.abTestService = undefined;
+
+var _getCookie = __webpack_require__(/*! @linx-impulse/commons-js/browser/getCookie */ "./node_modules/@linx-impulse/commons-js/src/browser/getCookie.js");
+
+var _config = __webpack_require__(/*! ../config */ "./src/config.js");
+
+var abTestService = exports.abTestService = {
+  getGroup: function getGroup() {
+    var cookie = (0, _getCookie.getCookie)(_config.config.cookieName.abTest) || '{}';
+
+    return JSON.parse(cookie).group || undefined;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/services/google-analytics.js":
+/*!******************************************!*\
+  !*** ./src/services/google-analytics.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var EVENT_CATEGORY = 'Banner Linx';
+
+var agents = [{
+  trackEvent: function trackEvent(event) {
+    var _window = window,
+        ga = _window.ga;
+
+
+    ga(function () {
+      var trackers = ga.getAll();
+
+      trackers.forEach(function (tracker) {
+        tracker.send('event', event.category, event.action, event.label);
+      });
+    });
+  },
+  isAvailable: function isAvailable() {
+    return Boolean(window.ga);
+  }
+},
+
+/* eslint-disable no-underscore-dangle */
+{
+  trackEvent: function trackEvent(event) {
+    window._gaq.push(['_trackEvent', event.category, event.action, event.label]);
+  },
+  isAvailable: function isAvailable() {
+    return Boolean(window._gaq);
+  }
+}];
+
+var googleAnalyticsService = exports.googleAnalyticsService = {
+  trackClick: function trackClick(slide) {
+    var hasExecuted = false;
+    agents.forEach(function (agent) {
+      if (agent.isAvailable()) {
+        agent.trackEvent({
+          category: EVENT_CATEGORY,
+          action: 'click',
+          label: slide.gaLabel
+        });
+        hasExecuted = true;
+      }
+    });
+    return hasExecuted;
+  },
+  trackView: function trackView(slide) {
+    agents.forEach(function (agent) {
+      if (agent.isAvailable()) {
+        agent.trackEvent({
+          category: EVENT_CATEGORY,
+          action: 'view',
+          label: slide.gaLabel
+        });
+      }
+    });
+  }
+};
+
+/***/ }),
+
+/***/ "./src/services/homologation.js":
+/*!**************************************!*\
+  !*** ./src/services/homologation.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.homologationService = undefined;
+
+var _deleteCookie = __webpack_require__(/*! @linx-impulse/commons-js/browser/deleteCookie */ "./node_modules/@linx-impulse/commons-js/src/browser/deleteCookie.js");
+
+var _getCookie = __webpack_require__(/*! @linx-impulse/commons-js/browser/getCookie */ "./node_modules/@linx-impulse/commons-js/src/browser/getCookie.js");
+
+var _setCookie = __webpack_require__(/*! @linx-impulse/commons-js/browser/setCookie */ "./node_modules/@linx-impulse/commons-js/src/browser/setCookie.js");
+
+var _parse = __webpack_require__(/*! @linx-impulse/commons-js/query-string/parse */ "./node_modules/@linx-impulse/commons-js/src/query-string/parse.js");
+
+var _config = __webpack_require__(/*! ../config */ "./src/config.js");
+
+function checkQuery(cookieName, optQuery, optCookie) {
+  var query = optQuery || window.location.search.slice(1);
+  var parameters = (0, _parse.parse)(query);
+
+  if (parameters) {
+    var homologation = parameters.bannerHomologation;
+    if (homologation === 'true') {
+      (0, _setCookie.setCookie)(cookieName, 'true', optCookie);
+    } else if (homologation === 'false') {
+      (0, _deleteCookie.deleteCookie)(cookieName, optCookie);
+    }
+  }
+}
+
+function checkCookie(cookieName, optCookie) {
+  var homologation = (0, _getCookie.getCookie)(cookieName, optCookie);
+  return homologation === 'true';
+}
+
+var homologationService = exports.homologationService = {
+  isHomologation: function isHomologation(optQuery, optCookie) {
+    var cookieName = _config.config.cookieName.bannerHomologation;
+    checkQuery(cookieName, optQuery, optCookie);
+    return checkCookie(cookieName, optCookie);
+  }
+};
+
+/***/ }),
+
+/***/ "./src/services/log.js":
+/*!*****************************!*\
+  !*** ./src/services/log.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var logService = exports.logService = {
+  debug: function debug() {},
+  error: function error() {},
+  info: function info() {}
+};
+
+/***/ }),
+
+/***/ "./src/util/local-storage.js":
+/*!***********************************!*\
+  !*** ./src/util/local-storage.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var localStorageUtil = exports.localStorageUtil = {
+  get: function get(name) {
+    return localStorage.getItem(name);
+  },
+  set: function set(name, storage) {
+    localStorage.setItem(name, storage);
+  },
+  remove: function remove(name) {
+    return localStorage.removeItem(name);
+  }
+};
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner-carousel/config.js":
+/*!*********************************************************!*\
+  !*** ./theme/components/linx-banner-carousel/config.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var config = {
+  callbacks: {
+    prepareRenderData: function prepareRenderData(renderData) {},
+    render: function render() {},
+    registerEvents: function registerEvents() {}
+  }
+};
+
+exports.default = config;
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner-carousel/index.js":
+/*!********************************************************!*\
+  !*** ./theme/components/linx-banner-carousel/index.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.templateStyle = exports.template = exports.config = undefined;
+
+var _config = __webpack_require__(/*! ./config */ "./theme/components/linx-banner-carousel/config.js");
+
+var _config2 = _interopRequireDefault(_config);
+
+var _template = __webpack_require__(/*! ./template.ejs */ "./theme/components/linx-banner-carousel/template.ejs");
+
+var _template2 = _interopRequireDefault(_template);
+
+var _style = __webpack_require__(/*! ./style.scss */ "./theme/components/linx-banner-carousel/style.scss");
+
+var _style2 = _interopRequireDefault(_style);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.config = _config2.default;
+exports.template = _template2.default;
+exports.templateStyle = _style2.default;
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner-carousel/style.scss":
+/*!**********************************************************!*\
+  !*** ./theme/components/linx-banner-carousel/style.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "linx-banner-carousel {\n  display: block;\n  overflow: hidden;\n  position: relative;\n  width: 100%; }\n  linx-banner-carousel linx-banner-slide {\n    height: 100%; }\n\nlinx-banner-carousel.linx-responsive linx-banner-slide {\n  height: auto; }\n\n.linx-slides {\n  position: relative;\n  width: 100%;\n  z-index: 1; }\n\n.linx-dots-navigator {\n  left: 50%;\n  position: absolute;\n  transform: translateX(-50%);\n  z-index: 2; }\n  .linx-dots-navigator button {\n    box-sizing: content-box;\n    cursor: pointer;\n    padding: 0; }\n    .linx-dots-navigator button:focus {\n      outline: 0; }\n  .linx-dots-navigator.linx-circle button {\n    border-radius: 50%; }\n\n.linx-next-button,\n.linx-prev-button {\n  background: transparent;\n  border: none;\n  cursor: pointer;\n  margin: 0;\n  padding: 0;\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n  z-index: 2; }\n  .linx-next-button:focus,\n  .linx-prev-button:focus {\n    outline: 0; }\n  .linx-next-button svg,\n  .linx-prev-button svg {\n    height: 100%;\n    width: 100%; }\n  .linx-next-button .linx-custom-arrow,\n  .linx-prev-button .linx-custom-arrow {\n    background-size: cover;\n    display: block;\n    height: 100%;\n    width: 100%; }\n\n.linx-prev-button svg {\n  transform: rotate(180deg); }\n\nlinx-banner-carousel.linx-horizontal linx-banner-slide {\n  display: none;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  width: 100%; }\n\nlinx-banner-carousel.linx-horizontal linx-banner-slide[visible] {\n  display: block; }\n\nlinx-banner-carousel.linx-horizontal linx-banner-slide.linx-prev {\n  display: block;\n  transform: translateX(-100%); }\n\nlinx-banner-carousel.linx-horizontal linx-banner-slide.linx-next {\n  display: block;\n  transform: translateX(100%); }\n\nlinx-banner-carousel.linx-fade linx-banner-slide {\n  display: block;\n  left: 0;\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  z-index: 1;\n  width: 100%; }\n\nlinx-banner-carousel.linx-fade linx-banner-slide.linx-current {\n  opacity: 1;\n  z-index: 2; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner-carousel/template.ejs":
+/*!************************************************************!*\
+  !*** ./theme/components/linx-banner-carousel/template.ejs ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<%- templateStyle %> <%\n  var scoped = btoa(unescape(encodeURIComponent(Math.random() + 'data-element')));\n  scoped = scoped.replace(/[=]/g, '_').toLowerCase();\n%> <style type=text/css> <% if (navigation) { %> .linx-dots-navigator[<%= scoped %>]{bottom: <%= navigation.bottomPosition %>px}.linx-dots-navigator[<%= scoped %>] button{background: <%= navigation.inactiveColor %>;border:solid <%= navigation.borderSize %>px <%= navigation.borderInactiveColor %>;height: <%= navigation.height %>px;margin-left: <%= navigation.leftSpace %>px;margin-right: <%= navigation.rightSpace %>px;width: <%= navigation.width %>px}.linx-dots-navigator[<%= scoped %>] button.linx-active{background: <%= navigation.activeColor %>;border-color: <%= navigation.borderActiveColor %>} <% } %> <% if (arrows) { %> .linx-prev-button[<%= scoped %>]{height: <%= arrows.height %>px;width: <%= arrows.width %>px}.linx-next-button[<%= scoped %>]{height: <%= arrows.height %>px;width: <%= arrows.width %>px}.linx-prev-button[<%= scoped %>]{left: <%= arrows.leftSpace %>px}.linx-next-button[<%= scoped %>]{right: <%= arrows.rightSpace %>px}.linx-arrow-path[<%= scoped %>]{fill: <%= arrows.color %>}.linx-prev-button[<%= scoped %>] .linx-custom-arrow{background-image:url(<%= arrows.urls[0] %>)}.linx-next-button[<%= scoped %>] .linx-custom-arrow{background-image:url(<%= arrows.urls[1] %>)} <% } %> </style> <% if (arrows) { %> <button class=linx-prev-button <%= scoped %>> <% if (arrows.type === 'default') {%> <svg xmlns:svg=http://www.w3.org/2000/svg xmlns=http://www.w3.org/2000/svg preserveAspectRatio=none viewBox=\"0 0 80.191409 139.17188\" version=1.1> <g transform=translate(-73.195312,-25.109375)> <path class=linx-arrow-path <%= scoped %> d=\"M 83.802734,25.109375 73.195312,35.714844 132.17578,94.695312 73.195312,153.67383 83.802734,164.28125 153.38672,94.695312 83.802734,25.109375 Z\"/> </g> </svg> <% } else if (arrows.type === 'image') { %> <i class=linx-custom-arrow></i> <% } %> </button> <% } %> <div class=linx-slides></div> <% if (arrows) { %> <button class=linx-next-button <%= scoped %>> <% if (arrows.type === 'default') {%> <svg xmlns:svg=http://www.w3.org/2000/svg xmlns=http://www.w3.org/2000/svg preserveAspectRatio=none viewBox=\"0 0 80.191409 139.17188\" version=1.1> <g transform=translate(-73.195312,-25.109375)> <path class=linx-arrow-path <%= scoped %> d=\"M 83.802734,25.109375 73.195312,35.714844 132.17578,94.695312 73.195312,153.67383 83.802734,164.28125 153.38672,94.695312 83.802734,25.109375 Z\"/> </g> </svg> <% } else if (arrows.type === 'image') { %> <i class=linx-custom-arrow></i> <% } %> </button> <% } %> <% if (navigation) { %> <div class=\"linx-dots-navigator linx-<%= navigation.type %>\" <%= scoped %> ></div> <% } %> ";
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner-slide/config.js":
+/*!******************************************************!*\
+  !*** ./theme/components/linx-banner-slide/config.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var config = {
+  callbacks: {
+    prepareRenderData: function prepareRenderData(renderData) {},
+    render: function render() {},
+    registerEvents: function registerEvents() {}
+  }
+};
+
+exports.default = config;
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner-slide/index.js":
+/*!*****************************************************!*\
+  !*** ./theme/components/linx-banner-slide/index.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.templateStyle = exports.template = exports.config = undefined;
+
+var _config = __webpack_require__(/*! ./config */ "./theme/components/linx-banner-slide/config.js");
+
+var _config2 = _interopRequireDefault(_config);
+
+var _template = __webpack_require__(/*! ./template.ejs */ "./theme/components/linx-banner-slide/template.ejs");
+
+var _template2 = _interopRequireDefault(_template);
+
+var _style = __webpack_require__(/*! ./style.scss */ "./theme/components/linx-banner-slide/style.scss");
+
+var _style2 = _interopRequireDefault(_style);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.config = _config2.default;
+exports.template = _template2.default;
+exports.templateStyle = _style2.default;
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner-slide/style.scss":
+/*!*******************************************************!*\
+  !*** ./theme/components/linx-banner-slide/style.scss ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "linx-banner-slide {\n  display: block;\n  position: relative;\n  width: 100%; }\n\nlinx-banner-slide:not(.linx-responsive) .linx-slide-image {\n  left: 50%;\n  position: absolute;\n  top: 50%;\n  transform: translate(-50%, -50%); }\n\n.linx-slide-image {\n  display: block;\n  height: auto;\n  width: 100%; }\n\nlinx-banner-slide.linx-fillHeight {\n  height: 100%; }\n  linx-banner-slide.linx-fillHeight .linx-slide-image {\n    height: 100%;\n    width: auto; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner-slide/template.ejs":
+/*!*********************************************************!*\
+  !*** ./theme/components/linx-banner-slide/template.ejs ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<%- templateStyle %> <% if (type === 'image') { %> <a href=\"<%= url %>\" class=linx-slide-link> <img src=\"<%= imageUrl %>\" alt=\"<%= name %>\" class=linx-slide-image> </a> <% } else if (type === 'html') { %> <%- css %> <%- html %> <% } %> ";
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner/config.js":
+/*!************************************************!*\
+  !*** ./theme/components/linx-banner/config.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var config = {
+  callbacks: {
+    prepareRenderData: function prepareRenderData(renderData) {},
+    render: function render() {},
+    registerEvents: function registerEvents() {}
+  }
+};
+
+exports.default = config;
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner/index.js":
+/*!***********************************************!*\
+  !*** ./theme/components/linx-banner/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.templateStyle = exports.template = exports.config = undefined;
+
+var _config = __webpack_require__(/*! ./config */ "./theme/components/linx-banner/config.js");
+
+var _config2 = _interopRequireDefault(_config);
+
+var _template = __webpack_require__(/*! ./template.ejs */ "./theme/components/linx-banner/template.ejs");
+
+var _template2 = _interopRequireDefault(_template);
+
+var _style = __webpack_require__(/*! ./style.scss */ "./theme/components/linx-banner/style.scss");
+
+var _style2 = _interopRequireDefault(_style);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.config = _config2.default;
+exports.template = _template2.default;
+exports.templateStyle = _style2.default;
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner/style.scss":
+/*!*************************************************!*\
+  !*** ./theme/components/linx-banner/style.scss ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "linx-banner {\n  display: block;\n  overflow: hidden;\n  width: 100%; }\n\n.linx-slides {\n  width: 100%; }\n  .linx-slides.linx-fillWidth > linx-banner-slide {\n    height: 100%; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./theme/components/linx-banner/template.ejs":
+/*!***************************************************!*\
+  !*** ./theme/components/linx-banner/template.ejs ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<%- templateStyle %> <div class=linx-slides></div> ";
+
+/***/ }),
+
+/***/ 1:
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** multi ./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js ./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js ./src/main.js ./src/components/index.js ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js */"./node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js");
+__webpack_require__(/*! ./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js */"./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js");
+__webpack_require__(/*! ./src/main.js */"./src/main.js");
+module.exports = __webpack_require__(/*! ./src/components/index.js */"./src/components/index.js");
+
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=banner.js.map

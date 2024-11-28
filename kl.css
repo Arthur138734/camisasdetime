@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #000000;
+  }
+  
+  h1{
+    font-size: 50px;
+  }
+  
+  header {
+    background: #000000;
+    color: gold;
+    padding: 10px 20px;
+    text-align: center;
+  }
+  
+  header h1 {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  #banner {
+    background: #f4f4f4;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  #produtos {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .produto {
+    display: inline-block;
+    width: 300px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .produto img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .produto h3 {
+    margin: 10px 0;
+  }
+  
+  .produto button {
+    background: #0044cc;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .produto button:hover {
+    background: #003399;
+  }
+  
+  footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+  }
+
+  .ll{
+    background: #000000;
+    color: gold;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .la{
+    background: #000000;
+    color: gold;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+ 
+  
+
+  .lo{
+    background: #000000;
+    color: gold;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .comprar{
+    font-size: 50px;
+    background: #000000;
+    color: gold;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .ui{
+    font-size: 50px;
+
+  }
+
+  .oi{
+    font-size: 50px;
+
+  }
+
+  .sla{
+    text-align: left;
+    font-size: 65px;
+    background: #000000;
+    color: gold;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    position: relative;
+    right: 62%;
+  }
+
+  .yu{
+    color: rgb(0, 0, 0);
+    font-size: 70px;
+    background-color: rgb(0, 0, 0);
+    border: 50px double rgb(0, 0, 0);
+    text-align: center;
+    font-style: italic;
+  }
+
+  .KK{
+    border-collapse: collapse;
+    width: 100%;
+    
+
+  }
+  
+  table th, table td {
+    border: 1px solid #000;
+    padding: 10px;
+    font-size: 20px; 
+    text-align: center;
+   
+    
+  }
+  
+  table th {
+    background-color: #f4f4f4;
+  }
+
+  .ar{
+    font-size: 40px;
+  }
+
+  .ft{
+    text-align: center;
+    border: 10px solid rgb(0, 0, 0);
+    text-align: center;
+    font-style: italic;
+    border-radius: 50px;
+    margin-left: 500px;
+    margin-right: 500px;
+}
+  
+.hj{
+  font-size: 50px;
+  text-align: center;
+    background: #000000;
+    color: gold;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.gg{
+  font-size: 50px;
+    background: #000000;
+    color: gold;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+
+
+  
